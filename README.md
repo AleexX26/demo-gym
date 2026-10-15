@@ -2,6 +2,8 @@
 
 Web de demostración de un gimnasio de barrio ficticio (fuerza, clases dirigidas y entrenamiento personal) para enseñar a dueños de gimnasios y boxes. Es una sola página estática (`index.html`), sin compilación ni servidor: horario filtrable con ficha ampliada, entrenadores, tarifas como tarjetas de socio, preguntas frecuentes y una reserva de clase de prueba que redacta el mensaje de WhatsApp o el email.
 
+**Web publicada:** https://demo-gym-a1v.pages.dev
+
 ## Cómo editar los datos
 
 Abre `index.html` y ve al principio del `<script>` (al final del archivo). Están todas las listas:

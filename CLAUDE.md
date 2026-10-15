@@ -33,7 +33,8 @@ ancho completo. Un solo acento: amarillo de marca de suelo `#FFC400`.
 - Ver en local: doble clic en `index.html`, o `npx http-server GYM -p 5180` desde la raíz (está en `.claude/launch.json` como `gym`).
 - Detector de diseño: `sh ~/.claude/skills/impeccable/scripts/impeccable detect --json index.html` (quedan 4 "cramped-padding" falsos positivos de secciones a sangre y el aviso del mapa SVG, que es intencionado).
 - Desplegar: `npx wrangler pages deploy . --project-name demo-gym --branch main` (desde `GYM/`).
-- Repo: https://github.com/AleexX26/demo-gym (rama `main`).
+- Repo: https://github.com/AleexX26/demo-gym (rama `main`). Web: https://demo-gym-a1v.pages.dev
+- Ojo: el proyecto de Pages es de subida directa (wrangler), no está conectado a Git: un push NO publica; hay que repetir el `wrangler pages deploy`.
 
 ## Cómo editar
 
@@ -43,6 +44,7 @@ ancho completo. Un solo acento: amarillo de marca de suelo `#FFC400`.
 
 ## Decisiones
 
+- 2026-10-15: Cloudflare Pages `demo-gym` creado con `wrangler pages project create --force` (wrangler 4.151 intenta convertir Pages en Workers y falla sin `--force`; solo hace falta la primera vez). URL asignada: demo-gym-a1v.pages.dev (demo-gym.pages.dev ya estaba cogido).
 - 2026-10-15: fotos reales de Unsplash (licencia libre) en vez de solo SVG, a petición del usuario ("que se vea realista, acogedor"). Pinterest descartado por derechos. Sin culturistas; se eligió una sesión coherente (@silverkblack) con luz natural y entrenador corrigiendo técnica.
 - 2026-10-15: nombre ficticio "Magnesio" (Delicias, Zaragoza): el nombre es el hilo de la dirección de arte (polvo de magnesio, cursor, sello).
 - 2026-10-15: un solo HTML sin Astro/React; todo se hace bien con CSS + WAAPI + View Transitions (filtro del horario).
