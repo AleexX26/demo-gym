@@ -1,0 +1,1618 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ======================================================================
+     MAGNESIO · Club de fuerza (DEMO)
+     Para cambiar el nombre en la pestaña y en Google: <title> y metas de aquí.
+     Los datos de la web (contacto, entrenadores, clases, tarifas...) están
+     al principio del <script> del final, en listas fáciles de copiar.
+     ====================================================================== -->
+<title>Magnesio · Club de fuerza en Delicias, Zaragoza</title>
+<meta name="description" content="Gimnasio de barrio en Delicias (Zaragoza): fuerza, clases dirigidas y entrenamiento personal en grupos reducidos. Tu primera clase es gratis.">
+<meta name="theme-color" content="#E3E0DA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Magnesio · Aquí se viene a sudar">
+<meta property="og:description" content="Fuerza, clases dirigidas y entrenamiento personal en Delicias, Zaragoza. Primera clase gratis.">
+<meta property="og:image" content="img/portada.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23141312'/%3E%3Ccircle cx='32' cy='32' r='9' fill='%23FFC400'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Tipografías: Big Shoulders Display (titulares, aire de estampado industrial) + Archivo (texto) -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/portada.webp">
+<script>document.documentElement.classList.add("js")</script>
+
+<style>
+/* ========================================================================
+   TOKENS — colores y tipografía.
+   El color de acento se cambia en GIMNASIO.acento (en el script); aquí está
+   el de por defecto. Debe ser un color claro: lleva texto negro encima.
+   ======================================================================== */
+:root {
+  --acento: #FFC400;          /* amarillo de marca de suelo */
+  --acento-tinta: #141312;    /* texto sobre el acento */
+
+  /* Modo claro: hormigón pulido */
+  --suelo: #E3E0DA;
+  --suelo-2: #D6D2CA;
+  --suelo-3: #C9C4BA;
+  --tinta: #141312;
+  --tinta-2: #45423C;
+
+  /* La pizarra (horario) y el caucho (pie) son oscuros en los dos modos */
+  --pizarra: #1E2521;
+  --pizarra-2: #29312C;
+  --tiza: #F3F1EC;
+  --tiza-2: #C3C8C0;
+  --caucho: #121212;
+  --caucho-2: #1E1E1E;
+
+  --disco: #161616;           /* discos de la barra */
+  --disco-texto: #EDEBE6;
+  --acero: #9A968F;
+
+  --f-display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --f-texto: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --t-mega: clamp(4.4rem, 12.2vw, 13rem);
+  --t-1: clamp(3.1rem, 7.2vw, 7.6rem);
+  --t-2: clamp(1.55rem, 2.5vw, 2.25rem);
+  --t-texto: clamp(1.0625rem, 1.05vw, 1.1875rem);
+  --t-peque: 0.9375rem;
+
+  --margen: clamp(16px, 3.2vw, 44px);
+  --hueco: clamp(104px, 13vw, 200px);
+  --ease: cubic-bezier(.16, 1, .3, 1);
+
+  /* Textura de hormigón (ruido muy suave) */
+  --textura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2  0 0 0 0 .19  0 0 0 0 .17  0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Desgaste de sello: agujeros pequeños que imitan tinta o tiza gastada */
+  --desgaste: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1.6 0 0 0 1.55'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 1 1 1 1 1 1 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23d)'/%3E%3C/svg%3E");
+  color-scheme: light dark;
+}
+
+/* Modo oscuro: suelo de caucho negro. No es una inversión: el hormigón pasa a
+   caucho con motas, los discos se aclaran para verse y la foto baja de brillo. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --suelo: #141414;
+    --suelo-2: #1D1D1C;
+    --suelo-3: #292927;
+    --tinta: #EFECE6;
+    --tinta-2: #B5B0A7;
+    --pizarra: #1F2823;
+    --pizarra-2: #2A342E;
+    --disco: #2A2A29;
+    --acero: #6F6C66;
+    --textura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='1' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .49  0 0 0 0 .46  0 0 0 3.2 -2.25'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* ========================================================================
+   BASE
+   ======================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; overflow-x: clip; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--suelo) var(--textura);
+  color: var(--tinta);
+  font: 400 var(--t-texto)/1.55 var(--f-texto);
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+}
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+/* La máscara de desgaste recorta lo que sale de la caja: este margen deja sitio a las tildes (Á, Í) */
+.con-tilde { padding-top: .14em; margin-top: -.14em; }
+a { color: inherit; text-underline-offset: .2em; text-decoration-thickness: 2px; }
+button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--f-display); font-weight: 800; text-transform: uppercase; line-height: .9; letter-spacing: -.005em; text-wrap: balance; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+::selection { background: var(--acento); color: var(--acento-tinta); }
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
+.reserva :focus-visible { outline-color: var(--acento-tinta); }
+html { scrollbar-color: var(--tinta-2) var(--suelo-2); }
+.oculto { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.envoltura { width: 100%; max-width: 1520px; margin: 0 auto; padding: 0 var(--margen); }
+
+/* Botón principal: plano, esquina recta, amarillo de marca de suelo */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6em;
+  min-height: 52px; padding: .7em 1.35em;
+  background: var(--acento); color: var(--acento-tinta);
+  font: 800 1.15rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .02em;
+  text-decoration: none; border: 0; border-radius: 0; cursor: pointer;
+  transition: transform .25s var(--ease), background-color .2s;
+}
+.boton:hover { transform: translateY(-2px); }
+.boton:active { transform: translateY(1px) scale(.98); }
+.boton--tinta { background: var(--tinta); color: var(--suelo); }
+.boton--tiza { background: var(--tiza); color: var(--pizarra); }
+.boton[disabled] { opacity: .45; cursor: not-allowed; transform: none; }
+.flecha { display: inline-block; transition: transform .25s var(--ease); }
+.boton:hover .flecha, .enlace:hover .flecha { transform: translateX(4px); }
+.enlace { font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; }
+.enlace:hover { text-decoration-color: var(--acento); }
+
+/* ========================================================================
+   NAVEGACIÓN
+   ======================================================================== */
+.cabecera {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  background: var(--suelo) var(--textura);
+  transition: transform .35s var(--ease);
+}
+.cabecera__fila { display: flex; align-items: center; gap: clamp(16px, 3vw, 40px); height: 72px; }
+.marca { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 900 2rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .01em; }
+.marca svg { width: 30px; height: 30px; flex: none; }
+.menu { display: flex; gap: clamp(14px, 2.2vw, 34px); margin-left: auto; }
+.menu a { position: relative; font-weight: 600; text-decoration: none; padding: 6px 0; }
+.menu a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--acento); transform: scaleX(0); transform-origin: 0 50%; transition: transform .3s var(--ease); }
+.menu a:hover::after { transform: scaleX(1); }
+.cabecera .boton { min-height: 44px; font-size: 1.05rem; }
+.abrir-menu { display: none; }
+
+@media (max-width: 860px) {
+  .menu {
+    position: fixed; inset: 72px 0 auto; flex-direction: column; gap: 0;
+    background: var(--suelo-2); padding: 8px var(--margen) 24px;
+    transform: translateY(-110%); visibility: hidden; transition: transform .35s var(--ease), visibility .35s;
+    z-index: -1;
+  }
+  .menu.abierto { transform: none; visibility: visible; }
+  .menu a { font: 800 2.4rem/1.25 var(--f-display); text-transform: uppercase; }
+  .menu a::after { display: none; }
+  .abrir-menu { display: inline-flex; align-items: center; margin-left: auto; min-height: 44px; padding: 0 12px; background: none; border: 0; font-weight: 700; cursor: pointer; }
+  .cabecera .boton { padding: .6em .8em; white-space: nowrap; font-size: 1rem; }
+  .cabecera__fila { gap: 10px; }
+  .marca { font-size: 1.65rem; gap: 8px; }
+  .marca svg { width: 24px; height: 24px; }
+}
+
+/* ========================================================================
+   PORTADA
+   ======================================================================== */
+.portada { position: relative; overflow-x: clip; padding-top: 104px; min-height: 100svh; display: flex; flex-direction: column; }
+.portada__rejilla { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(20px, 3vw, 48px); align-items: start; flex: 1; }
+.portada__texto { padding: clamp(8px, 3vh, 40px) 0 clamp(70px, 9vw, 150px); position: relative; z-index: 2; }
+.sello {
+  font-size: min(10.2vw, 13rem); line-height: .84; font-weight: 900; letter-spacing: -.01em;
+  margin-left: -.04em;
+  -webkit-mask-image: var(--desgaste); mask-image: var(--desgaste); -webkit-mask-size: 300px; mask-size: 300px;
+}
+.sello .linea { display: block; white-space: nowrap; transform-origin: 30% 70%; }
+.portada__lema { max-width: 34ch; margin-top: clamp(20px, 3vh, 36px); font-size: clamp(1.15rem, 1.45vw, 1.4rem); line-height: 1.45; }
+.portada__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; margin-top: clamp(22px, 3.4vh, 40px); }
+.portada__datos { margin-top: 18px; color: var(--tinta-2); font-size: var(--t-peque); }
+
+.portada__foto { position: relative; margin: 0; height: min(72svh, 760px); min-height: 420px; }
+.portada__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 50%; }
+@media (prefers-color-scheme: dark) { .portada__foto img { filter: brightness(.86) contrast(1.04); } }
+/* Tira de cinta americana amarilla pegada sobre la foto */
+.cinta {
+  position: absolute; z-index: 3; left: -26px; top: 26px;
+  padding: 10px 26px 11px;
+  background: var(--acento); color: var(--acento-tinta);
+  font: 800 clamp(1.2rem, 1.6vw, 1.55rem)/1 var(--f-display); text-transform: uppercase; letter-spacing: .02em;
+  transform: rotate(-3.5deg);
+  clip-path: polygon(1.5% 0, 100% 0, 98.5% 100%, 0 100%); /* cinta cortada en diagonal */
+}
+.portada__pie-foto { position: absolute; right: 0; bottom: -28px; font-size: .8rem; color: var(--tinta-2); }
+
+/* La barra olímpica que se carga de discos al hacer scroll */
+.carga { position: relative; z-index: 4; margin-top: clamp(-150px, -8vw, -40px); padding-bottom: 28px; }
+.carga__lienzo { position: relative; height: clamp(110px, 15vw, 230px); }
+.carga__eje { position: absolute; left: 1%; right: 1%; top: 50%; height: clamp(5px, .55vw, 9px); transform: translateY(-50%); background: var(--acero); }
+.carga__manguito { position: absolute; top: 50%; height: clamp(9px, .95vw, 15px); transform: translateY(-50%); background: var(--acero); }
+.carga__tope { position: absolute; top: 50%; width: 1.1%; height: 24%; transform: translateY(-50%); background: var(--acero); }
+.disco {
+  position: absolute; top: 0; height: 100%;
+  background: var(--disco); color: var(--disco-texto);
+  border-radius: 6px / 14px;
+  display: grid; place-items: center;
+  will-change: transform;
+}
+.disco span { writing-mode: vertical-rl; transform: rotate(180deg); font: 800 clamp(.55rem, 1vw, 1rem)/1 var(--f-display); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.disco--acento { background: var(--acento); color: var(--acento-tinta); }
+.disco--peque { top: 19%; height: 62%; }
+.disco--cierre { top: 36%; height: 28%; background: var(--acero); border-radius: 3px; }
+.carga__total { display: flex; gap: .5em; align-items: baseline; justify-content: center; font-size: var(--t-peque); color: var(--tinta-2); margin-top: 10px; }
+.carga__total strong { font: 900 clamp(1.6rem, 2.4vw, 2.2rem)/1 var(--f-display); color: var(--tinta); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 860px) {
+  .portada { padding-top: 92px; min-height: 0; }
+  .portada__rejilla { grid-template-columns: 1fr; }
+  .portada__texto { padding-bottom: 8px; }
+  .sello { font-size: 17.2vw; }
+  .portada__foto { height: 58svh; min-height: 300px; margin-right: calc(var(--margen) * -1); }
+  .cinta { left: -10px; top: 18px; }
+  .carga { margin-top: -54px; }
+  .disco span { display: none; }
+  .portada__pie-foto { right: var(--margen); bottom: -24px; }
+}
+
+/* ========================================================================
+   SECCIONES — cabeceras compartidas
+   ======================================================================== */
+.seccion { padding: var(--hueco) 0; }
+.titular { font-size: var(--t-1); }
+.entradilla { max-width: 52ch; margin-top: 22px; font-size: clamp(1.1rem, 1.3vw, 1.3rem); }
+
+/* Aparición al hacer scroll (solo con JS: sin script todo se ve) */
+.js [data-aparece] { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--d, 0) * 80ms); }
+.js [data-aparece].visto { opacity: 1; transform: none; }
+
+/* ========================================================================
+   CLASES — la pizarra de horarios
+   ======================================================================== */
+.clases { background: var(--pizarra); color: var(--tiza); position: relative; }
+.clases::before { /* polvo de tiza sobre la pizarra */
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .04' numOctaves='3' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .5 -.2'/%3E%3C/filter%3E%3Crect width='520' height='520' filter='url(%23t)'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+.clases > * { position: relative; }
+.clases .titular { -webkit-mask-image: var(--desgaste); mask-image: var(--desgaste); -webkit-mask-size: 260px; mask-size: 260px; }
+.clases__cabecera { display: grid; grid-template-columns: 1fr auto; gap: 24px 48px; align-items: end; }
+.clases__cabecera .entradilla { color: var(--tiza-2); }
+
+.filtros { margin-top: clamp(36px, 5vw, 60px); display: grid; gap: 18px; }
+.disciplinas { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex; align-items: baseline; gap: .45em;
+  min-height: 44px; padding: .5em 1em .45em;
+  background: var(--pizarra-2); color: var(--tiza); border: 0; cursor: pointer;
+  font: 700 1.2rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .03em;
+  transition: background-color .2s, color .2s, transform .25s var(--ease);
+}
+.chip small { font: 600 .82rem/1 var(--f-texto); opacity: .75; font-variant-numeric: tabular-nums; }
+.chip:hover { transform: translateY(-2px); }
+.chip[aria-pressed="true"] { background: var(--acento); color: var(--acento-tinta); transform: rotate(-1.2deg); }
+.selectores { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; }
+.selector { display: inline-flex; align-items: center; gap: 10px; font-size: var(--t-peque); color: var(--tiza-2); }
+.selector select {
+  min-height: 44px; padding: 0 2.2em 0 .8em; border: 0; border-radius: 0; appearance: none; -webkit-appearance: none;
+  background: var(--pizarra-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23F3F1EC' stroke-width='2'/%3E%3C/svg%3E") right .8em center no-repeat;
+  color: var(--tiza); font-weight: 600; cursor: pointer;
+}
+.selector select option { background: var(--pizarra); }
+.contador { color: var(--tiza-2); font-size: var(--t-peque); margin-left: auto; }
+
+.dias { display: none; }
+.semana { margin-top: 34px; display: grid; grid-template-columns: repeat(var(--columnas, 6), minmax(0, 1fr)); gap: 10px; }
+.dia { min-width: 0; }
+.dia h3 { font-size: clamp(1.8rem, 2.6vw, 2.6rem); font-weight: 800; padding: 6px 2px 14px; color: var(--tiza); }
+.dia__lista { display: grid; gap: 10px; }
+.dia__vacio { color: var(--tiza-2); font-size: var(--t-peque); padding: 12px 2px; }
+.clase {
+  width: 100%; text-align: left; cursor: pointer; border: 0;
+  display: grid; gap: 6px; padding: 16px 16px 14px;
+  background: var(--pizarra-2); color: var(--tiza);
+  transition: background-color .25s, transform .3s var(--ease);
+}
+.clase:hover, .clase:focus-visible { background: #34403A; transform: translateY(-3px); }
+.clase__hora { font: 800 clamp(1.9rem, 2.4vw, 2.5rem)/.9 var(--f-display); font-variant-numeric: tabular-nums; }
+.clase__nombre { font: 800 1.35rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .01em; }
+.clase__meta { font-size: .9rem; color: var(--tiza-2); line-height: 1.35; }
+.intensidad { display: inline-flex; gap: 4px; align-items: center; }
+.intensidad i { width: 16px; height: 16px; border-radius: 50%; background: var(--tiza); position: relative; }
+.intensidad i::after { content: ""; position: absolute; inset: 5.5px; border-radius: 50%; background: var(--pizarra-2); }
+.intensidad i.apagado { background: #4A564F; }
+.clase:hover .intensidad i::after { background: #34403A; }
+.clase--fuera { display: none; }
+
+.vista-previa {
+  position: fixed; left: 0; top: 0; z-index: 60; width: 300px; pointer-events: none;
+  background: var(--tiza); color: var(--pizarra);
+  opacity: 0; transform: translate3d(-999px, -999px, 0) rotate(-2deg);
+  transition: opacity .2s;
+  box-shadow: 0 18px 40px -12px rgba(0,0,0,.45);
+}
+.vista-previa.activa { opacity: 1; }
+.vista-previa__media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--pizarra); }
+.vista-previa__media img, .vista-previa__media svg { width: 100%; height: 100%; object-fit: cover; }
+.vista-previa p { padding: 12px 14px 14px; font-size: .92rem; line-height: 1.4; }
+.vista-previa strong { display: block; font: 800 1.3rem/1 var(--f-display); text-transform: uppercase; margin-bottom: 6px; }
+
+@media (max-width: 860px) {
+  .clases__cabecera { grid-template-columns: 1fr; }
+  .contador { margin-left: 0; width: 100%; }
+  .dias { display: flex; gap: 6px; overflow-x: auto; margin-top: 26px; scrollbar-width: none; }
+  .dias button { flex: none; min-height: 44px; padding: 0 14px; border: 0; background: var(--pizarra-2); color: var(--tiza); font: 800 1.15rem/1 var(--f-display); text-transform: uppercase; cursor: pointer; }
+  .dias button[aria-current="true"] { background: var(--tiza); color: var(--pizarra); }
+  .semana { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 16px calc(var(--margen) * -1) 0; padding: 0 var(--margen) 8px; scroll-padding: 0 var(--margen); scrollbar-width: none; }
+  .dia { flex: 0 0 84%; scroll-snap-align: start; }
+  .semana--un-dia .dia { flex-basis: 100%; }
+}
+
+/* Ficha ampliada de una clase */
+.ficha { border: 0; padding: 0; width: min(1080px, calc(100% - 24px)); max-height: calc(100svh - 24px); background: var(--tiza); color: var(--pizarra); overflow: auto; }
+.ficha::backdrop { background: rgba(14, 17, 15, .82); }
+.ficha[open] { animation: ficha-entra .45s var(--ease); }
+@keyframes ficha-entra { from { opacity: 0; transform: translateY(24px) scale(.98); } }
+.ficha__rejilla { display: grid; grid-template-columns: 1.1fr 1fr; min-height: 560px; }
+.ficha__media { background: var(--pizarra); min-height: 280px; }
+.ficha__media img, .ficha__media svg { width: 100%; height: 100%; object-fit: cover; }
+.ficha__cuerpo { padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; gap: 18px; }
+.ficha__cuerpo h2 { font-size: clamp(2.6rem, 5vw, 4.6rem); }
+.ficha__datos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
+.ficha__datos dt { font-size: .85rem; color: #4E554F; }
+.ficha__datos dd { margin: 2px 0 0; font: 800 1.5rem/1.05 var(--f-display); text-transform: uppercase; }
+.ficha .intensidad i { background: var(--pizarra); }
+.ficha .intensidad i::after { background: var(--tiza); }
+.ficha .intensidad i.apagado { background: #BDBFB8; }
+.ficha__acciones { margin-top: auto; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ficha__nav { display: flex; gap: 8px; margin-left: auto; }
+.cuadrado { min-width: 52px; min-height: 52px; border: 0; background: var(--pizarra); color: var(--tiza); font: 800 1.4rem/1 var(--f-display); cursor: pointer; transition: transform .2s var(--ease); }
+.cuadrado:hover { transform: translateY(-2px); }
+.ficha__cerrar { position: absolute; top: 12px; right: 12px; z-index: 2; }
+@media (max-width: 760px) {
+  .ficha__rejilla { grid-template-columns: 1fr; min-height: 0; }
+  .ficha__media { aspect-ratio: 16 / 10; min-height: 0; }
+  .ficha__nav { margin-left: 0; }
+}
+
+/* ========================================================================
+   ENTRENADORES — fichas pegadas con cinta
+   ======================================================================== */
+.entrenadores__lista { margin-top: clamp(48px, 7vw, 96px); display: grid; gap: clamp(72px, 10vw, 140px); }
+.coach { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 72px); align-items: start; }
+.coach:nth-child(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.coach:nth-child(even) .coach__foto { order: 2; }
+.coach__foto { position: relative; margin: 0; aspect-ratio: 4 / 5; background: var(--suelo-2); }
+.coach__foto img, .coach__foto svg { width: 100%; height: 100%; object-fit: cover; }
+.coach__foto::before, .coach__foto::after { /* trozos de cinta */
+  content: ""; position: absolute; z-index: 2; width: 120px; height: 34px; background: var(--acento); opacity: .92;
+  clip-path: polygon(4% 0, 100% 0, 96% 100%, 0 100%);
+}
+.coach__foto::before { top: -14px; left: 18px; transform: rotate(-6deg); }
+.coach__foto::after { bottom: -12px; right: 22px; transform: rotate(4deg); }
+.coach__nombre { font-size: clamp(3.4rem, 7.4vw, 7.8rem); font-weight: 900; line-height: .84; }
+.coach__especialidad { margin-top: 14px; font: 700 clamp(1.3rem, 1.8vw, 1.7rem)/1.1 var(--f-display); text-transform: uppercase; color: var(--tinta-2); letter-spacing: .02em; }
+.coach__frase { margin: clamp(22px, 3vw, 34px) 0 0; font-size: var(--t-2); line-height: 1.2; font-weight: 500; max-width: 24ch; }
+.coach__frase::before { content: "«"; } .coach__frase::after { content: "»"; }
+.coach__listas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: clamp(26px, 3vw, 40px); }
+.coach__listas h4 { font-size: 1.35rem; margin-bottom: 10px; }
+.coach__listas li { padding: 7px 0; font-size: 1rem; }
+.coach__listas li + li { border-top: 0; }
+.etiquetas { display: flex; flex-wrap: wrap; gap: 6px; }
+.etiquetas li { padding: 5px 10px 4px; background: var(--suelo-2); font: 700 1.05rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .03em; }
+.coach__acciones { margin-top: clamp(26px, 3vw, 40px); display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; }
+@media (max-width: 860px) {
+  .coach, .coach:nth-child(even) { grid-template-columns: 1fr; }
+  .coach:nth-child(even) .coach__foto { order: 0; }
+  .coach__foto { aspect-ratio: 4 / 3.6; }
+  .coach__listas { grid-template-columns: 1fr; }
+}
+
+/* ========================================================================
+   TARIFAS — tarjetas de socio perforadas
+   ======================================================================== */
+.tarifas { background: var(--suelo-2); }
+.tarifas__lista { margin-top: clamp(44px, 6vw, 80px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 32px); }
+.tarjeta {
+  --fondo: var(--suelo); --hueco-color: var(--suelo-2);
+  position: relative; display: grid; grid-template-columns: 1fr auto; min-height: 330px;
+  background: var(--fondo); color: var(--tinta);
+  transition: transform .4s var(--ease);
+}
+.tarjeta:nth-child(2) { --fondo: var(--tinta); color: var(--suelo); }
+.tarjeta:nth-child(odd) { transform: rotate(-.6deg); }
+.tarjeta:nth-child(even) { transform: rotate(.5deg) translateY(28px); }
+.tarjeta:hover { transform: rotate(0) translateY(-4px); }
+.tarjeta__cuerpo { padding: clamp(22px, 2.6vw, 36px); display: flex; flex-direction: column; gap: 14px; }
+.tarjeta__socio { display: flex; justify-content: space-between; gap: 12px; font-size: .85rem; opacity: .75; }
+.tarjeta h3 { font-size: clamp(2.2rem, 3.6vw, 3.6rem); }
+.tarjeta__precio { font: 900 clamp(3.6rem, 6vw, 6rem)/.85 var(--f-display); font-variant-numeric: tabular-nums; }
+.tarjeta__precio small { font: 700 1.1rem/1 var(--f-texto); margin-left: 6px; text-transform: none; }
+.tarjeta__incluye { display: grid; gap: 6px; font-size: 1rem; }
+.tarjeta__incluye li::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: currentColor; margin-right: 10px; transform: translateY(-1px); }
+.tarjeta .boton { align-self: flex-start; margin-top: auto; }
+.tarjeta:nth-child(2) .boton { background: var(--acento); }
+/* Matriz perforada: la línea de agujeros que separa la tarjeta del resguardo */
+.tarjeta__resguardo {
+  position: relative; width: clamp(92px, 9vw, 128px);
+  display: grid; place-items: center;
+}
+.perforado { position: absolute; left: -6px; top: 22px; bottom: 22px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+.perforado i { width: 12px; height: 12px; border-radius: 50%; background: var(--hueco-color); flex: none; }
+.tarjeta__resguardo::before, .tarjeta__resguardo::after { /* muescas arriba y abajo */
+  content: ""; position: absolute; left: -14px; width: 28px; height: 28px; border-radius: 50%; background: var(--hueco-color);
+}
+.tarjeta__resguardo::before { top: -14px; } .tarjeta__resguardo::after { bottom: -14px; }
+.sello-estado {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font: 900 clamp(1.5rem, 2.2vw, 2rem)/1 var(--f-display); text-transform: uppercase; letter-spacing: .06em;
+  padding: 14px 8px; border: 4px solid currentColor;
+  -webkit-mask-image: var(--desgaste); mask-image: var(--desgaste); -webkit-mask-size: 160px; mask-size: 160px;
+}
+.sello-estado--libre { color: #2F7D4A; }
+.tarjeta:nth-child(2) .sello-estado--libre { color: var(--acento); }
+.sello-estado--completo { color: #B3261E; transform: rotate(186deg); }
+@media (prefers-color-scheme: dark) {
+  .sello-estado--libre { color: #6CC58C; }
+  .sello-estado--completo { color: #FF6B5E; }
+  .tarjeta:nth-child(2) { --fondo: var(--tiza); color: var(--pizarra); }
+}
+/* Agujero de "perforado" cuando eliges el plan */
+.tarjeta__ponche { position: absolute; top: 22px; right: calc(clamp(92px, 9vw, 128px) + 22px); width: 26px; height: 26px; border-radius: 50%; background: var(--hueco-color); transform: scale(0); transition: transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+.tarjeta.elegida .tarjeta__ponche { transform: scale(1); }
+.tarjeta--completa .tarjeta__cuerpo { opacity: .82; }
+@media (max-width: 860px) {
+  .tarifas__lista { grid-template-columns: 1fr; }
+  .tarjeta:nth-child(even) { transform: rotate(.5deg); }
+}
+
+/* ========================================================================
+   EL GIMNASIO
+   ======================================================================== */
+.gimnasio__frase { font-size: clamp(3.6rem, 10vw, 10.5rem); line-height: .84; font-weight: 900; max-width: 12ch; }
+.gimnasio__rejilla { margin-top: clamp(48px, 6vw, 88px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 32px); }
+.gimnasio__filosofia { grid-column: 1 / span 5; font-size: clamp(1.15rem, 1.45vw, 1.4rem); line-height: 1.5; display: grid; gap: 1em; align-content: start; }
+.gimnasio__foto-grande { grid-column: 7 / span 6; grid-row: span 2; margin: 0; }
+.gimnasio__foto-grande img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 3 / 4; }
+.instalaciones { grid-column: 1 / span 5; }
+.instalaciones h3, .donde h3 { font-size: clamp(2rem, 3vw, 2.8rem); margin-bottom: 14px; }
+.instalaciones li { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 12px 0; align-items: baseline; }
+.instalaciones li b { font: 900 1.9rem/1 var(--f-display); min-width: 2.4ch; font-variant-numeric: tabular-nums; }
+.instalaciones li:nth-child(odd) { background: transparent; }
+.gimnasio__tira { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: inherit; margin-top: clamp(10px, 2vw, 24px); }
+.gimnasio__tira img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.donde { grid-column: 1 / -1; margin-top: clamp(40px, 6vw, 80px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(24px, 4vw, 64px); align-items: stretch; }
+.donde__texto { display: grid; gap: 22px; align-content: start; }
+.donde__direccion { font: 800 clamp(1.8rem, 2.8vw, 2.6rem)/1 var(--f-display); text-transform: uppercase; }
+.horario-tabla { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.horario-tabla th { text-align: left; font-weight: 600; padding: 9px 0; }
+.horario-tabla td { text-align: right; padding: 9px 0; }
+.horario-tabla tr + tr { border-top: 2px solid var(--suelo-3); }
+.mapa { position: relative; display: block; min-height: 360px; background: var(--suelo-2); overflow: hidden; text-decoration: none; }
+.mapa svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mapa__boton { position: absolute; left: 18px; bottom: 18px; }
+.mapa:hover .mapa__pin { transform: translateY(-6px); }
+.mapa__pin { transition: transform .35s var(--ease); transform-box: fill-box; }
+@media (max-width: 860px) {
+  .gimnasio__filosofia, .gimnasio__foto-grande, .instalaciones { grid-column: 1 / -1; grid-row: auto; }
+  .gimnasio__foto-grande img { aspect-ratio: 4 / 3.4; }
+  .gimnasio__tira { grid-template-columns: 1fr 1fr; }
+  .gimnasio__tira figure:last-child { display: none; }
+  .donde { grid-template-columns: 1fr; }
+  .mapa { min-height: 300px; }
+}
+.gimnasio__tira figure, .gimnasio__foto-grande { margin: 0; }
+
+/* ========================================================================
+   CÓMO EMPEZAR — un carril de suelo con cinta amarilla
+   ======================================================================== */
+.empezar { background: var(--caucho); color: var(--tiza); overflow: hidden; }
+.carril-caja { position: relative; margin-top: clamp(56px, 7vw, 100px); }
+.carril { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; }
+.carril__cinta { position: absolute; left: 0; right: 0; top: 52px; height: 12px; background: #2E2E2C; }
+.carril__cinta i { position: absolute; inset: 0; background: var(--acento); transform-origin: 0 50%; transform: scaleX(var(--avance, 1)); }
+.paso { position: relative; padding-right: clamp(14px, 2vw, 32px); }
+.paso .paso__cuando { font: 900 clamp(2.4rem, 3.6vw, 3.6rem)/1 var(--f-display); text-transform: uppercase; height: 44px; display: flex; align-items: flex-end; white-space: nowrap; }
+.paso__marca { display: block; width: 12px; height: 46px; margin-top: 10px; background: var(--tiza); transform: skewX(-12deg); transition: background-color .3s; }
+.paso.hecho .paso__marca { background: var(--acento); }
+.paso h3 { margin-top: 22px; font-size: clamp(1.7rem, 2.2vw, 2.2rem); }
+.paso p { margin-top: 10px; color: var(--tiza-2); font-size: 1rem; max-width: 30ch; }
+.empezar__foto { margin: clamp(56px, 7vw, 96px) 0 0; display: grid; grid-template-columns: 2fr 1fr; gap: clamp(14px, 2vw, 24px); }
+.empezar__foto img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16 / 9; }
+.empezar__foto figure { margin: 0; }
+.empezar__foto figure:last-child img { aspect-ratio: auto; }
+@media (max-width: 860px) {
+  .carril { grid-template-columns: 1fr; gap: 34px; padding-left: 40px; }
+  .carril-caja { margin-top: 48px; }
+  .carril__cinta { left: 0; right: auto; top: 0; bottom: 0; width: 12px; height: auto; }
+  .carril__cinta i { transform-origin: 50% 0; transform: scaleY(var(--avance, 1)); }
+  .paso__marca { display: none; }
+  .paso h3 { margin-top: 8px; }
+  .empezar__foto { grid-template-columns: 1fr; }
+  .empezar__foto figure:last-child { display: none; }
+}
+
+/* ========================================================================
+   PREGUNTAS FRECUENTES
+   ======================================================================== */
+.faq__rejilla { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(28px, 5vw, 96px); align-items: start; }
+.faq__lado { position: sticky; top: 110px; display: grid; gap: 24px; }
+.faq__lado img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.pregunta { background: var(--suelo-2); margin-bottom: 8px; }
+.pregunta summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 18px; align-items: center; padding: 22px clamp(18px, 2vw, 28px); font: 800 clamp(1.45rem, 2vw, 1.9rem)/1.05 var(--f-display); text-transform: uppercase; }
+.pregunta summary::-webkit-details-marker { display: none; }
+.pregunta summary:hover { background: var(--suelo-3); }
+.mas { flex: none; width: 34px; height: 34px; position: relative; background: var(--tinta); transition: transform .35s var(--ease), background-color .2s; }
+.mas::before, .mas::after { content: ""; position: absolute; left: 9px; right: 9px; top: 15.5px; height: 3px; background: var(--suelo); }
+.mas::after { transform: rotate(90deg); transition: transform .35s var(--ease); }
+.pregunta[open] .mas { background: var(--acento); }
+.pregunta[open] .mas::before, .pregunta[open] .mas::after { background: var(--acento-tinta); }
+.pregunta[open] .mas::after { transform: rotate(0); }
+.pregunta__respuesta { padding: 0 clamp(18px, 2vw, 28px) 24px; max-width: 64ch; }
+@supports (interpolate-size: allow-keywords) {
+  .pregunta { interpolate-size: allow-keywords; }
+  .pregunta::details-content { height: 0; overflow: clip; transition: height .4s var(--ease), content-visibility .4s allow-discrete; }
+  .pregunta[open]::details-content { height: auto; }
+}
+@media (max-width: 860px) {
+  .faq__rejilla { grid-template-columns: 1fr; }
+  .faq__lado { position: static; }
+  .faq__lado img { display: none; }
+}
+
+/* ========================================================================
+   RESERVA — a todo color, como una hoja de registro de series
+   ======================================================================== */
+.reserva { background: var(--acento); color: var(--acento-tinta); }
+.reserva .titular { font-size: clamp(3.8rem, 10.5vw, 11rem); font-weight: 900; line-height: .84; -webkit-mask-image: var(--desgaste); mask-image: var(--desgaste); -webkit-mask-size: 300px; mask-size: 300px; }
+.reserva__rejilla { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(28px, 5vw, 88px); margin-top: clamp(40px, 5vw, 72px); }
+.reserva__lado { display: grid; gap: 24px; align-content: start; font-size: 1.1rem; }
+.directo { display: grid; gap: 8px; margin-top: 8px; }
+.directo a { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 56px; padding: 0 18px; background: var(--acento-tinta); color: var(--acento); text-decoration: none; font: 800 1.35rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .02em; transition: transform .25s var(--ease); }
+.directo a:hover { transform: translateX(6px); }
+.hoja { display: grid; gap: 0; }
+.fila { display: grid; grid-template-columns: minmax(130px, 2.3fr) minmax(0, 7fr); gap: 18px; align-items: center; padding: 14px 0; border-bottom: 3px solid var(--acento-tinta); }
+.fila:first-child { border-top: 3px solid var(--acento-tinta); }
+.fila > label, .fila > legend, .fila > .fila__etiqueta { font: 800 1.35rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .02em; }
+fieldset.fila { border: 0; border-bottom: 3px solid var(--acento-tinta); margin: 0; min-inline-size: 0; padding: 14px 0; }
+fieldset.fila legend { float: left; padding: 0; }
+.campo { width: 100%; min-height: 48px; padding: 8px 4px; background: transparent; border: 0; border-radius: 0; font-size: 1.1rem; font-weight: 500; color: var(--acento-tinta); }
+.campo::placeholder { color: #5C4A00; opacity: 1; }
+.campo:focus { background: rgba(255, 255, 255, .35); outline: none; }
+select.campo { appearance: none; -webkit-appearance: none; padding-right: 32px; cursor: pointer; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23141312' stroke-width='2.4'/%3E%3C/svg%3E") right 6px center no-repeat; }
+select.campo option, select.campo optgroup { background: #fff; color: #141312; }
+textarea.campo { resize: vertical; min-height: 80px; }
+.opciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.opcion { position: relative; }
+.opcion input { position: absolute; opacity: 0; inset: 0; cursor: pointer; margin: 0; }
+.opcion span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; background: rgba(20, 19, 18, .1); font-weight: 600; transition: background-color .2s, color .2s; }
+.opcion input:checked + span { background: var(--acento-tinta); color: var(--acento); }
+.opcion input:focus-visible + span { outline: 3px solid var(--acento-tinta); outline-offset: 2px; }
+.opcion:hover span { background: rgba(20, 19, 18, .2); }
+.opcion input:checked:hover + span { background: var(--acento-tinta); }
+.hoja__envio { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 28px; }
+.hoja__envio .boton { min-height: 60px; font-size: 1.35rem; }
+.boton--negro { background: var(--acento-tinta); color: var(--acento); }
+.boton--borde { background: transparent; color: var(--acento-tinta); box-shadow: inset 0 0 0 3px var(--acento-tinta); }
+.aviso { width: 100%; font-weight: 600; min-height: 1.5em; }
+.error { color: #7A1200; }
+@media (max-width: 860px) {
+  .reserva__rejilla { grid-template-columns: 1fr; }
+  .fila { grid-template-columns: 1fr; gap: 6px; }
+  fieldset.fila legend { float: left; width: 100%; margin-bottom: 10px; }
+  fieldset.fila .opciones { clear: both; }
+  .hoja__envio .boton { flex: 1 1 100%; }
+}
+
+/* ========================================================================
+   PIE
+   ======================================================================== */
+.pie { background: var(--caucho); color: var(--tiza); padding: clamp(64px, 8vw, 120px) 0 28px; }
+.pie__rejilla { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.pie h3 { font-size: 1.5rem; margin-bottom: 12px; color: var(--acento); }
+.pie p, .pie li { font-size: 1rem; color: var(--tiza-2); }
+.pie a { color: var(--tiza); }
+.pie li { padding: 3px 0; }
+.pie .pie__nombre {
+  margin-top: clamp(48px, 7vw, 100px);
+  font: 900 21.5vw/.78 var(--f-display); text-transform: uppercase; letter-spacing: -.015em; text-align: center; white-space: nowrap;
+  color: var(--tiza); -webkit-mask-image: var(--desgaste); mask-image: var(--desgaste); -webkit-mask-size: 340px; mask-size: 340px;
+  margin-left: -.04em;
+}
+.pie__legal { margin-top: 26px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; font-size: .85rem; color: #8F938C; }
+.pie__legal a { color: inherit; }
+@media (max-width: 860px) { .pie__rejilla { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .pie__rejilla { grid-template-columns: 1fr; } }
+
+/* ========================================================================
+   CURSOR DE MAGNESIO (solo ratón) y polvo
+   ======================================================================== */
+.polvo { position: fixed; inset: 0; z-index: 90; pointer-events: none; width: 100%; height: 100%; }
+.cursor { position: fixed; left: 0; top: 0; z-index: 91; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #fff; mix-blend-mode: difference; pointer-events: none; opacity: 0; transition: width .25s var(--ease), height .25s var(--ease), margin .25s var(--ease), opacity .2s; }
+.cursor.visible { opacity: 1; }
+.cursor.grande { width: 34px; height: 34px; margin: -17px 0 0 -17px; }
+@media (hover: none), (pointer: coarse) { .cursor, .polvo { display: none; } }
+
+/* ========================================================================
+   MOVIMIENTO REDUCIDO: se ve todo, sin desplazamientos
+   ======================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .js [data-aparece] { opacity: 1; transform: none; }
+  .cursor, .polvo { display: none; }
+  .tarjeta, .tarjeta:nth-child(odd), .tarjeta:nth-child(even) { transform: none; }
+}
+</style>
+</head>
+
+<body>
+<a class="oculto" href="#clases">Saltar al horario</a>
+
+<!-- ================= NAVEGACIÓN ================= -->
+<header class="cabecera" id="cabecera">
+  <div class="envoltura cabecera__fila">
+    <a class="marca" href="#portada" aria-label="Inicio">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="currentColor"/><circle cx="32" cy="32" r="21" fill="none" stroke="var(--suelo)" stroke-width="2.5" opacity=".35"/><circle cx="32" cy="32" r="8.5" fill="var(--acento)"/></svg>
+      <span data-gym="nombre">Magnesio</span>
+    </a>
+    <nav class="menu" id="menu" aria-label="Principal">
+      <a href="#clases">Clases</a>
+      <a href="#entrenadores">Entrenadores</a>
+      <a href="#tarifas">Tarifas</a>
+      <a href="#gimnasio">El gimnasio</a>
+    </nav>
+    <button class="abrir-menu" id="abrir-menu" aria-expanded="false" aria-controls="menu">Menú</button>
+    <a class="boton" href="#reserva">Prueba gratis</a>
+  </div>
+</header>
+
+<main>
+<!-- ================= PORTADA ================= -->
+<section class="portada" id="portada">
+  <div class="envoltura portada__rejilla">
+    <div class="portada__texto">
+      <h1 class="sello con-tilde" id="titular"><span class="linea">Aquí se viene</span><span class="linea">a sudar.</span></h1>
+      <p class="portada__lema" data-aparece style="--d:6"><span data-gym="lema">Gimnasio de fuerza, clases dirigidas y entrenamiento personal en Delicias, Zaragoza.</span> Grupos de diez como máximo y un entrenador que se sabe tu nombre.</p>
+      <div class="portada__acciones" data-aparece style="--d:7">
+        <a class="boton" href="#reserva">Reserva tu clase gratis <span class="flecha" aria-hidden="true">→</span></a>
+        <a class="enlace" href="#clases">Ver el horario</a>
+      </div>
+      <p class="portada__datos" data-aparece style="--d:8" id="datos-portada">Primera clase gratis · Sin permanencia</p>
+    </div>
+    <figure class="portada__foto">
+      <p class="cinta" data-gym="plazas">Plazas abiertas para noviembre</p>
+      <img src="img/portada.webp" alt="Una socia levanta una barra cargada mientras el entrenador revisa su técnica junto a los ventanales del gimnasio" width="2000" height="1125" fetchpriority="high">
+    </figure>
+  </div>
+  <div class="envoltura carga" aria-hidden="true">
+    <div class="carga__lienzo" id="barra"></div>
+    <p class="carga__total">Barra <strong id="kg">20</strong> kg · se carga mientras bajas</p>
+  </div>
+</section>
+
+<!-- ================= CLASES Y HORARIO ================= -->
+<section class="seccion clases" id="clases">
+  <div class="envoltura">
+    <div class="clases__cabecera">
+      <div>
+        <h2 class="titular con-tilde" data-aparece>Horario de la semana</h2>
+        <p class="entradilla" data-aparece style="--d:1" id="entradilla-clases">Clases de una hora o menos, en grupos reducidos. Toca una para ver de qué va.</p>
+      </div>
+    </div>
+
+    <div class="filtros" data-aparece style="--d:2">
+      <div class="disciplinas" id="filtro-disciplina" role="group" aria-label="Filtrar por disciplina"></div>
+      <div class="selectores">
+        <label class="selector">Entrenador
+          <select id="filtro-entrenador"></select>
+        </label>
+        <label class="selector">Día
+          <select id="filtro-dia"></select>
+        </label>
+        <p class="contador" id="contador" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="dias" id="dias" role="tablist" aria-label="Ir a un día"></div>
+    <div class="semana" id="semana"></div>
+  </div>
+</section>
+
+<!-- ================= ENTRENADORES ================= -->
+<section class="seccion entrenadores" id="entrenadores">
+  <div class="envoltura">
+    <h2 class="titular" data-aparece>Quién te corrige la sentadilla</h2>
+    <p class="entradilla" data-aparece style="--d:1">Tres entrenadores titulados que dan todas las clases. Si vienes a las 7:00 un martes, te va a saludar por tu nombre el miércoles.</p>
+    <div class="entrenadores__lista" id="lista-entrenadores"></div>
+  </div>
+</section>
+
+<!-- ================= TARIFAS ================= -->
+<section class="seccion tarifas" id="tarifas">
+  <div class="envoltura">
+    <h2 class="titular" data-aparece>Precio cerrado, sin letra pequeña</h2>
+    <p class="entradilla" data-aparece style="--d:1">Sin permanencia. La matrícula son 20 €, y en noviembre no la pagas si te apuntas después de la clase de prueba.</p>
+    <div class="tarifas__lista" id="lista-tarifas"></div>
+  </div>
+</section>
+
+<!-- ================= EL GIMNASIO ================= -->
+<section class="seccion gimnasio" id="gimnasio">
+  <div class="envoltura">
+    <h2 class="gimnasio__frase" data-aparece>Técnica antes que peso.</h2>
+    <div class="gimnasio__rejilla">
+      <div class="gimnasio__filosofia" data-aparece style="--d:1">
+        <p>Magnesio es un gimnasio de barrio en una antigua nave de Delicias. Aquí no hay espejos para hacerse fotos ni música a todo volumen: hay barras, discos, sacos y gente que viene a entrenar antes o después de trabajar.</p>
+        <p>Primero aprendes a moverte bien; el peso llega solo. Por eso las clases son de diez personas como máximo y siempre hay un entrenador mirando. Da igual que vengas a ponerte fuerte, a quitarte el dolor de espalda o a probar el boxeo: nadie te va a mirar raro.</p>
+      </div>
+      <figure class="gimnasio__foto-grande" data-aparece style="--d:2">
+        <img src="img/manos-magnesio.webp" alt="Manos cubiertas de magnesio, en blanco y negro" loading="lazy" width="900" height="1200">
+      </figure>
+      <div class="instalaciones" data-aparece style="--d:2">
+        <h3>Lo que hay dentro</h3>
+        <ul id="lista-instalaciones"></ul>
+      </div>
+      <div class="gimnasio__tira">
+        <figure data-aparece style="--d:1"><img src="img/pesas-rusas.webp" alt="Fila de pesas rusas sobre el suelo de caucho" loading="lazy" width="1400" height="933"></figure>
+        <figure data-aparece style="--d:2"><img src="img/discos-amarillos.webp" alt="Discos de competición amarillos apoyados en el suelo" loading="lazy" width="1400" height="933"></figure>
+        <figure data-aparece style="--d:3"><img src="img/tiza-50.webp" alt="Un 50 escrito a tiza en el suelo dentro de un círculo" loading="lazy" width="900" height="1350"></figure>
+      </div>
+      <div class="donde">
+        <div class="donde__texto" data-aparece>
+          <h3>Dónde estamos</h3>
+          <p class="donde__direccion" data-gym="direccion">Calle de los Herreros 14, Zaragoza</p>
+          <p id="como-llegar">A cinco minutos andando de la Avenida de Madrid. Aparcamiento para bicis dentro.</p>
+          <table class="horario-tabla" id="tabla-horario"><caption class="oculto">Horario de apertura</caption></table>
+        </div>
+        <a class="mapa" id="mapa" href="#" target="_blank" rel="noopener" data-aparece style="--d:1" aria-label="Abrir la dirección en Google Maps">
+          <!-- Plano dibujado a mano (no es un mapa real): calles en tonos del suelo y el gimnasio como un disco amarillo -->
+          <svg viewBox="0 0 700 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="700" height="420" fill="var(--suelo-2)"/>
+            <g fill="var(--suelo-3)">
+              <rect x="30" y="30" width="170" height="110"/><rect x="236" y="30" width="190" height="110"/><rect x="462" y="30" width="220" height="110"/>
+              <rect x="30" y="176" width="170" height="96"/><rect x="236" y="176" width="190" height="96"/><rect x="462" y="176" width="220" height="96"/>
+              <rect x="30" y="308" width="170" height="90"/><rect x="236" y="308" width="190" height="90"/><rect x="462" y="308" width="220" height="90"/>
+            </g>
+            <path d="M-20 400 L720 250" stroke="var(--suelo)" stroke-width="34"/>
+            <text x="560" y="262" font-family="Archivo, sans-serif" font-size="15" font-weight="700" fill="var(--tinta-2)" transform="rotate(-11.4 560 262)">AV. DE MADRID</text>
+            <text x="252" y="164" font-family="Archivo, sans-serif" font-size="13" font-weight="700" fill="var(--tinta-2)">C/ DE LOS HERREROS</text>
+            <g class="mapa__pin">
+              <circle cx="330" cy="224" r="40" fill="var(--tinta)"/>
+              <circle cx="330" cy="224" r="27" fill="none" stroke="var(--suelo)" stroke-width="2" opacity=".4"/>
+              <circle cx="330" cy="224" r="12" fill="var(--acento)"/>
+            </g>
+          </svg>
+          <span class="boton mapa__boton">Abrir en Google Maps <span class="flecha" aria-hidden="true">↗</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CÓMO EMPEZAR ================= -->
+<section class="seccion empezar" id="empezar">
+  <div class="envoltura">
+    <h2 class="titular" data-aparece>Así se empieza aquí</h2>
+    <p class="entradilla" data-aparece style="--d:1;color:var(--tiza-2)">Sin prisas y sin venderte nada el primer día. Cinco paradas, marcadas en el suelo como las calles de una carrera.</p>
+    <div class="carril-caja">
+      <div class="carril__cinta" aria-hidden="true"><i></i></div>
+      <ol class="carril" id="carril"></ol>
+    </div>
+    <div class="empezar__foto">
+      <figure data-aparece><img src="img/valoracion.webp" alt="Un entrenador apunta en una hoja los objetivos de una socia sentada a su lado" loading="lazy" width="1400" height="788"></figure>
+      <figure data-aparece style="--d:2"><img src="img/choque.webp" alt="Dos personas chocan los puños después de entrenar" loading="lazy" width="1400" height="933"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PREGUNTAS FRECUENTES ================= -->
+<section class="seccion faq" id="faq">
+  <div class="envoltura faq__rejilla">
+    <div class="faq__lado">
+      <h2 class="titular" data-aparece>Lo que todos preguntan</h2>
+      <p data-aparece style="--d:1">¿Te queda otra duda? Escríbenos por <a class="enlace" data-enlace="whatsapp" href="#">WhatsApp</a> y te contesta un entrenador, no un robot.</p>
+      <img src="img/discos-hierro.webp" alt="Discos de hierro de 10, 5 y 1,25 kilos sobre un suelo de madera" loading="lazy" width="1400" height="933" data-aparece style="--d:2">
+    </div>
+    <div id="lista-faq"></div>
+  </div>
+</section>
+
+<!-- ================= RESERVA ================= -->
+<section class="seccion reserva" id="reserva">
+  <div class="envoltura">
+    <h2 class="titular con-tilde" data-aparece>¿Cuándo empiezas?</h2>
+    <div class="reserva__rejilla">
+      <div class="reserva__lado" data-aparece style="--d:1">
+        <p>Rellena la hoja y te abrimos un mensaje ya escrito con tus datos. Lo envías tú, por WhatsApp o por email, y te contestamos en el día con la hora de tu prueba.</p>
+        <p>Nada se guarda en esta web.</p>
+        <div class="directo">
+          <a data-enlace="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
+          <a data-enlace="instagram" href="#" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a>
+          <a data-enlace="email" href="#">Email <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <form class="hoja" id="formulario" novalidate data-aparece style="--d:2">
+        <div class="fila">
+          <label for="f-nombre">Nombre</label>
+          <input class="campo" id="f-nombre" name="nombre" autocomplete="given-name" placeholder="Cómo te llamas" required>
+        </div>
+        <div class="fila">
+          <label for="f-objetivo">Objetivo</label>
+          <select class="campo" id="f-objetivo" name="objetivo">
+            <option>Ganar fuerza</option>
+            <option>Perder grasa y estar en forma</option>
+            <option>Volver a moverme después de un tiempo</option>
+            <option>Aprender a boxear</option>
+            <option>Quitarme el dolor de espalda</option>
+            <option>Ganar movilidad</option>
+            <option>Todavía no lo sé</option>
+          </select>
+        </div>
+        <div class="fila">
+          <label for="f-interes">Clase o plan</label>
+          <select class="campo" id="f-interes" name="interes"></select>
+        </div>
+        <div class="fila">
+          <label for="f-entrenador">Entrenador</label>
+          <select class="campo" id="f-entrenador" name="entrenador"></select>
+        </div>
+        <fieldset class="fila">
+          <legend>Nivel</legend>
+          <div class="opciones">
+            <label class="opcion"><input type="radio" name="nivel" value="Nunca he entrenado" checked><span>Nunca he entrenado</span></label>
+            <label class="opcion"><input type="radio" name="nivel" value="Entreno a veces"><span>Entreno a veces</span></label>
+            <label class="opcion"><input type="radio" name="nivel" value="Entreno cada semana"><span>Entreno cada semana</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="fila">
+          <legend>Días</legend>
+          <div class="opciones" id="f-dias"></div>
+        </fieldset>
+        <fieldset class="fila">
+          <legend>Horas</legend>
+          <div class="opciones">
+            <label class="opcion"><input type="checkbox" name="horas" value="Mañana temprano (6:30–10:00)"><span>6:30–10:00</span></label>
+            <label class="opcion"><input type="checkbox" name="horas" value="Mediodía (13:00–16:00)"><span>13:00–16:00</span></label>
+            <label class="opcion"><input type="checkbox" name="horas" value="Tarde (17:00–22:00)"><span>17:00–22:00</span></label>
+          </div>
+        </fieldset>
+        <div class="fila">
+          <label for="f-nota">Algo más</label>
+          <textarea class="campo" id="f-nota" name="nota" rows="2" placeholder="Lesiones, dudas, si vienes con alguien… (opcional)"></textarea>
+        </div>
+        <div class="hoja__envio">
+          <button class="boton boton--negro" type="submit" value="whatsapp">Enviar por WhatsApp <span class="flecha" aria-hidden="true">→</span></button>
+          <button class="boton boton--borde" type="submit" value="email">Enviar por email</button>
+          <p class="aviso" id="aviso" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ================= PIE ================= -->
+<footer class="pie">
+  <div class="envoltura">
+    <div class="pie__rejilla">
+      <div><h3>Dirección</h3><p data-gym="direccion">Calle de los Herreros 14, Zaragoza</p></div>
+      <div><h3>Horario</h3><ul id="pie-horario"></ul></div>
+      <div><h3>Escríbenos</h3><ul>
+        <li><a data-enlace="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a data-enlace="email" href="#" data-texto="email">Email</a></li>
+        <li><a data-enlace="instagram" href="#" target="_blank" rel="noopener" data-texto="instagram">Instagram</a></li>
+      </ul></div>
+      <div><h3>La web</h3><ul>
+        <li><a href="#clases">Horario</a></li>
+        <li><a href="#tarifas">Tarifas</a></li>
+        <li><a href="#faq">Preguntas</a></li>
+        <li><a href="#reserva">Clase de prueba</a></li>
+      </ul></div>
+    </div>
+    <p class="pie__nombre con-tilde" data-gym="nombre" aria-hidden="true">Magnesio</p>
+    <div class="pie__legal">
+      <p>Web de demostración: gimnasio, personas y datos de contacto ficticios.</p>
+      <p id="creditos">Fotos: Unsplash.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="vista-previa" id="vista-previa" aria-hidden="true"></div>
+
+<dialog class="ficha" id="ficha" aria-labelledby="ficha-titulo"></dialog>
+
+<canvas class="polvo" id="polvo" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<noscript><p style="padding:20px;background:#FFC400;color:#141312">Activa JavaScript para ver el horario y las tarifas, o escríbenos por WhatsApp.</p></noscript>
+
+<script>
+/* ==========================================================================
+   DATOS — todo lo que se edita está aquí. Para añadir algo, copia un bloque,
+   pégalo debajo y cambia los valores. El diseño no se toca.
+   ========================================================================== */
+
+/* ---------- 1. El gimnasio: nombre, contacto, redes y color ---------- */
+const GIMNASIO = {
+  nombre: "Magnesio",
+  ciudad: "Zaragoza",
+  barrio: "Delicias",
+  direccion: "Calle de los Herreros 14, 50017 Zaragoza",
+  comoLlegar: "A cinco minutos andando de la Avenida de Madrid. Aparcamiento para bicis dentro.",
+  plazas: "Plazas abiertas para noviembre",            // la cinta amarilla de la portada
+  email: "hola@magnesio.club",
+  whatsapp: "34600123456",                              // con prefijo de país, sin + ni espacios
+  instagram: "magnesio.club",                           // sin @
+  acento: "#FFC400",                                    // color de acento (claro: lleva texto negro encima)
+  horario: [                                            // horario de apertura
+    { dias: "Lunes a viernes", horas: "6:30 – 22:00" },
+    { dias: "Sábados", horas: "9:00 – 14:00" },
+    { dias: "Domingos y festivos", horas: "Cerrado" },
+  ],
+  instalaciones: [                                      // número + texto
+    { n: "6", texto: "racks con plataforma de halterofilia y barras de competición" },
+    { n: "8", texto: "sacos y un ring de entrenamiento para boxeo" },
+    { n: "4", texto: "remos y 4 bicis de aire en la zona de cross training" },
+    { n: "1", texto: "sala de yoga y movilidad con luz natural y suelo de madera" },
+    { n: "2", texto: "vestuarios con duchas de agua caliente y taquillas con candado" },
+  ],
+};
+
+/* ---------- 2. Entrenadores ----------
+   foto: ruta de la imagen (por ejemplo "img/nombre.webp"). Si la dejas vacía ("")
+   se dibuja una ilustración con su nombre. */
+const ENTRENADORES = [
+  {
+    nombre: "Dani Ortega",
+    especialidad: "Fuerza y halterofilia",
+    frase: "La técnica primero. El peso ya llegará.",
+    disciplinas: ["Fuerza", "Cross training"],
+    certificaciones: ["Grado en Ciencias de la Actividad Física y del Deporte", "Técnico de halterofilia nivel 2", "Entrenamiento de fuerza para mayores de 50"],
+    instagram: "dani.levanta",
+    foto: "img/entrenador-dani.webp",
+  },
+  {
+    nombre: "Lucía Ferrer",
+    especialidad: "Boxeo y HIIT",
+    frase: "Guantes puestos y cabeza fría.",
+    disciplinas: ["Boxeo", "HIIT"],
+    certificaciones: ["Entrenadora nacional de boxeo nivel 2", "Técnico deportivo en acondicionamiento físico", "Primeros auxilios y RCP"],
+    instagram: "lucia.golpea",
+    foto: "img/saco.webp",
+  },
+  {
+    nombre: "Marta Lozano",
+    especialidad: "Yoga y movilidad",
+    frase: "Moverse bien es entrenar para siempre.",
+    disciplinas: ["Yoga", "Movilidad"],
+    certificaciones: ["Profesora de yoga, 500 horas", "Especialista en movilidad articular", "Fisioterapeuta colegiada"],
+    instagram: "marta.respira",
+    foto: "",   // sin foto: se dibuja una ilustración con su nombre
+  },
+];
+
+/* ---------- 3. Clases ----------
+   disciplina: crea su filtro sola (escríbela siempre igual).
+   entrenador: el nombre exacto de la lista de entrenadores.
+   dia: Lunes, Martes, Miércoles, Jueves, Viernes, Sábado o Domingo.
+   intensidad: 1, 2 o 3 (discos).  imagen: "" dibuja una ilustración. */
+const CLASES = [
+  { nombre: "Fuerza básica", disciplina: "Fuerza", entrenador: "Dani Ortega", dia: "Lunes", hora: "07:00", duracion: 60, intensidad: 2,
+    descripcion: "Sentadilla, peso muerto y press con la barra casi vacía hasta que el movimiento sale solo. La clase para empezar con buen pie.", imagen: "img/fuerza.webp" },
+  { nombre: "HIIT 30", disciplina: "HIIT", entrenador: "Lucía Ferrer", dia: "Lunes", hora: "14:00", duracion: 30, intensidad: 3,
+    descripcion: "Treinta minutos de comba, intervalos y trabajo con tu propio peso. Para la hora de comer y volver a la oficina con otra cara.", imagen: "img/comba.webp" },
+  { nombre: "Cross training", disciplina: "Cross training", entrenador: "Dani Ortega", dia: "Martes", hora: "19:30", duracion: 60, intensidad: 3,
+    descripcion: "Calentamiento, técnica y un entrenamiento del día escrito en la pizarra. Cada ejercicio tiene una versión para tu nivel.", imagen: "img/saltos.webp" },
+  { nombre: "Boxeo técnico", disciplina: "Boxeo", entrenador: "Lucía Ferrer", dia: "Martes", hora: "20:30", duracion: 60, intensidad: 2,
+    descripcion: "Guardia, desplazamientos y combinaciones con manoplas. Sin contacto, sin sparring obligatorio: aquí se aprende a pegar bien.", imagen: "img/manoplas.webp" },
+  { nombre: "Yoga para gente fuerte", disciplina: "Yoga", entrenador: "Marta Lozano", dia: "Miércoles", hora: "09:00", duracion: 60, intensidad: 1,
+    descripcion: "Yoga pensado para quien levanta peso: caderas, hombros y espalda. No hace falta tocarse los pies.", imagen: "img/yoga.webp" },
+  { nombre: "Halterofilia técnica", disciplina: "Fuerza", entrenador: "Dani Ortega", dia: "Miércoles", hora: "19:00", duracion: 75, intensidad: 3,
+    descripcion: "Arrancada y dos tiempos por partes, con barra técnica y mucha corrección. Grupo de seis personas como máximo.", imagen: "img/halterofilia.webp" },
+  { nombre: "HIIT circuito", disciplina: "HIIT", entrenador: "Lucía Ferrer", dia: "Jueves", hora: "07:30", duracion: 45, intensidad: 2,
+    descripcion: "Estaciones con pesas rusas, remo y cajón. Trabajas a tu ritmo y el reloj de la pared manda.", imagen: "img/kettlebell.webp" },
+  { nombre: "Movilidad", disciplina: "Movilidad", entrenador: "Marta Lozano", dia: "Jueves", hora: "20:00", duracion: 45, intensidad: 1,
+    descripcion: "Estiramientos activos y control articular para moverte mejor dentro y fuera del gimnasio. Muy recomendable si trabajas sentado.", imagen: "img/estiramiento.webp" },
+  { nombre: "Fuerza 5×5", disciplina: "Fuerza", entrenador: "Dani Ortega", dia: "Viernes", hora: "18:00", duracion: 60, intensidad: 3,
+    descripcion: "Cinco series de cinco con los básicos y apuntando cada marca en tu hoja. Para quien ya conoce los movimientos y quiere subir.", imagen: "img/discos-hierro.webp" },
+  { nombre: "Saco y sombra", disciplina: "Boxeo", entrenador: "Lucía Ferrer", dia: "Viernes", hora: "19:30", duracion: 60, intensidad: 3,
+    descripcion: "Asaltos de tres minutos al saco y trabajo de sombra. La mejor forma de acabar la semana.", imagen: "" },
+  { nombre: "WOD del sábado", disciplina: "Cross training", entrenador: "Dani Ortega", dia: "Sábado", hora: "10:00", duracion: 60, intensidad: 3,
+    descripcion: "Entrenamiento por parejas o por equipos. Se viene a sudar y a desayunar juntos después.", imagen: "" },
+  { nombre: "Espalda sana", disciplina: "Movilidad", entrenador: "Marta Lozano", dia: "Sábado", hora: "12:00", duracion: 45, intensidad: 1,
+    descripcion: "Ejercicios suaves de fuerza y movilidad para cuidar la espalda. La da una fisioterapeuta.", imagen: "img/movilidad.webp" },
+];
+
+/* ---------- 4. Tarifas ----------
+   precio: número en euros.  periodo: lo que va detrás del precio.
+   disponible: true = "Plazas libres", false = "Completo". */
+const TARIFAS = [
+  { nombre: "Libre", precio: 35, periodo: "/ mes", incluye: ["Sala de fuerza y cross training en todo el horario", "Valoración inicial con un entrenador", "Duchas y taquilla"], disponible: true },
+  { nombre: "Clases ilimitadas", precio: 59, periodo: "/ mes", incluye: ["Todas las clases del horario", "Sala libre incluida", "Revisión de técnica cada mes"], disponible: true },
+  { nombre: "Bono 10", precio: 80, periodo: "10 clases", incluye: ["Diez clases a elegir", "Válido tres meses", "Sin cuota mensual"], disponible: true },
+  { nombre: "Entrenamiento personal", precio: 180, periodo: "/ mes", incluye: ["Cuatro sesiones de una hora con tu entrenador", "Plan escrito y seguimiento por WhatsApp", "Clases ilimitadas incluidas"], disponible: false },
+];
+
+/* ---------- 5. Cómo empezar (los pasos) ---------- */
+const PASOS = [
+  { cuando: "Hoy", titulo: "Prueba gratis", texto: "Eliges una clase del horario y vienes. Sin pagar nada y sin compromiso." },
+  { cuando: "Día 1", titulo: "Valoración", texto: "Media hora con un entrenador: cómo te mueves, qué te duele y qué quieres conseguir." },
+  { cuando: "Semana 1", titulo: "Plan a medida", texto: "Te decimos qué clases, cuántos días y con qué cargas empezar." },
+  { cuando: "Mes 1", titulo: "Primer mes", texto: "Cuatro semanas aprendiendo técnica. Nadie te mete prisa con el peso." },
+  { cuando: "Cada mes", titulo: "Seguimiento", texto: "Repetimos las pruebas, apuntamos tus marcas y ajustamos el plan." },
+];
+
+/* ---------- 6. Preguntas frecuentes ---------- */
+const PREGUNTAS = [
+  { p: "¿Qué nivel necesito para empezar?", r: "Ninguno. Todas las clases tienen una versión para quien empieza, y en la primera semana te enseñamos los movimientos con poco peso. La mitad de la gente que entrena aquí no había pisado un gimnasio." },
+  { p: "¿Hay matrícula?", r: "Sí, 20 € una sola vez. En noviembre no la pagas si te apuntas después de tu clase de prueba." },
+  { p: "¿Tengo permanencia?", r: "No. Pagas mes a mes y te vas cuando quieras, avisando antes del día 25." },
+  { p: "¿Desde qué edad se puede entrenar?", r: "Desde los 16 años con autorización de madre, padre o tutor. A partir de los 18, sin papeles. Tenemos socios de más de 70." },
+  { p: "¿Puedo congelar o dar de baja la cuota?", r: "Puedes congelarla hasta dos meses al año por lesión, viaje o lo que surja, sin coste. La baja se pide por WhatsApp o email antes del día 25 y no hay que dar explicaciones." },
+  { p: "¿Hay duchas y taquillas?", r: "Sí: dos vestuarios con duchas de agua caliente, secadores y taquillas con candado. Si se te olvida el candado, te prestamos uno." },
+  { p: "¿Qué llevo el primer día?", r: "Ropa cómoda, zapatillas de suela plana, una botella de agua y una toalla. El magnesio lo ponemos nosotros. Llega diez minutos antes para que te enseñemos el gimnasio." },
+];
+
+/* ---------- 7. Créditos de las fotos (Unsplash, licencia libre) ---------- */
+const CREDITOS = ["silverkblack", "victorfreitas", "tcraye", "yellowteapot", "markadriane", "sunday2sunday", "c7arb", "betaboulders", "rmrdnl", "laurar1vera", "tjsocoz", "alexsaks", "herickson7"];
+
+/* ==========================================================================
+   A partir de aquí, el funcionamiento. No hace falta tocarlo.
+   ========================================================================== */
+const DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const escapar = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const nombreCorto = (n) => n.split(" ")[0];
+const sinMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const conRaton = matchMedia("(hover: hover) and (pointer: fine)").matches;
+const urlWhatsapp = (texto) => `https://wa.me/${GIMNASIO.whatsapp}${texto ? "?text=" + encodeURIComponent(texto) : ""}`;
+const urlInstagram = (u) => `https://instagram.com/${u}`;
+CLASES.forEach((c, i) => (c.id = "c" + i));
+
+/* ---------- Ilustración SVG para lo que no tiene foto ----------
+   Un disco de competición recortado con el nombre estampado a tiza. */
+function ilustracion(texto, persona = false) {
+  const palabras = texto.toUpperCase().split(" ");
+  const lineas = [];
+  palabras.forEach((p) => {
+    const ult = lineas[lineas.length - 1];
+    if (ult && (ult + " " + p).length <= 9) lineas[lineas.length - 1] = ult + " " + p;
+    else lineas.push(p);
+  });
+  /* Personas: vertical (4:5). Clases: apaisada (4:3). */
+  const [an, al] = persona ? [400, 500] : [400, 300];
+  const tam = persona ? 92 : 62;
+  const y0 = al - 34 - (lineas.length - 1) * tam * 0.9;
+  const txt = lineas.map((l, i) => `<text x="30" y="${y0 + i * tam * 0.9}" font-size="${tam}">${escapar(l)}</text>`).join("");
+  const cx = an - 70, cy = persona ? 150 : 92, r = persona ? 190 : 150;
+  return `<svg viewBox="0 0 ${an} ${al}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustración: ${escapar(texto)}">
+    <rect width="${an}" height="${al}" fill="var(--pizarra)"/>
+    <g opacity=".16" stroke="var(--tiza)" stroke-width="3" fill="none" stroke-linecap="round">
+      <path d="M30 40l16 46M54 38l14 46M78 36l14 46M100 36l14 46M24 62l100 4"/>
+    </g>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="var(--disco)"/>
+    <circle cx="${cx}" cy="${cy}" r="${r * 0.75}" fill="none" stroke="var(--tiza)" stroke-width="2" opacity=".18"/>
+    <circle cx="${cx}" cy="${cy}" r="${r * 0.25}" fill="var(--acero)"/>
+    <circle cx="${cx}" cy="${cy}" r="${r * 0.1}" fill="var(--pizarra)"/>
+    <text x="${cx - r * 0.62}" y="${cy + r * 0.52}" font-size="${persona ? 40 : 32}" fill="var(--acento)" font-family="var(--f-display)" font-weight="900" transform="rotate(-24 ${cx} ${cy})">${persona ? "COACH" : "20 KG"}</text>
+    <g fill="var(--tiza)" font-family="var(--f-display)" font-weight="900" style="letter-spacing:.01em">${txt}</g>
+  </svg>`;
+}
+const media = (src, alt, persona = false) =>
+  src ? `<img src="${escapar(src)}" alt="${escapar(alt)}" loading="lazy">` : ilustracion(alt, persona);
+
+const discos = (n) =>
+  `<span class="intensidad" aria-label="Intensidad ${n} de 3" title="Intensidad ${n} de 3">${[1, 2, 3].map((i) => `<i class="${i > n ? "apagado" : ""}"></i>`).join("")}</span>`;
+
+/* ---------- Datos del gimnasio en la página ---------- */
+function rellenarGimnasio() {
+  document.documentElement.style.setProperty("--acento", GIMNASIO.acento);
+  $$('[data-gym="nombre"]').forEach((el) => (el.textContent = GIMNASIO.nombre));
+  $$('[data-gym="direccion"]').forEach((el) => (el.textContent = GIMNASIO.direccion));
+  $$('[data-gym="plazas"]').forEach((el) => (el.textContent = GIMNASIO.plazas));
+  $("#como-llegar").textContent = GIMNASIO.comoLlegar;
+  $$('[data-enlace="whatsapp"]').forEach((a) => (a.href = urlWhatsapp("Hola, tengo una pregunta sobre el gimnasio.")));
+  $$('[data-enlace="instagram"]').forEach((a) => (a.href = urlInstagram(GIMNASIO.instagram)));
+  $$('[data-enlace="email"]').forEach((a) => (a.href = "mailto:" + GIMNASIO.email));
+  $$('[data-texto="email"]').forEach((a) => (a.textContent = GIMNASIO.email));
+  $$('[data-texto="instagram"]').forEach((a) => (a.textContent = "@" + GIMNASIO.instagram));
+  $("#mapa").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(GIMNASIO.direccion);
+
+  const filas = GIMNASIO.horario.map((h) => `<tr><th scope="row">${escapar(h.dias)}</th><td>${escapar(h.horas)}</td></tr>`).join("");
+  $("#tabla-horario").insertAdjacentHTML("beforeend", "<tbody>" + filas + "</tbody>");
+  $("#pie-horario").innerHTML = GIMNASIO.horario.map((h) => `<li>${escapar(h.dias)}: ${escapar(h.horas)}</li>`).join("");
+  $("#datos-portada").textContent = `Primera clase gratis · Sin permanencia · ${GIMNASIO.horario[0].dias} ${GIMNASIO.horario[0].horas}`;
+  $("#lista-instalaciones").innerHTML = GIMNASIO.instalaciones.map((x) => `<li><b>${escapar(x.n)}</b><span>${escapar(x.texto)}</span></li>`).join("");
+  $("#entradilla-clases").textContent = `${CLASES.length} clases a la semana, en grupos de diez como máximo. Pasa por encima o toca una para ver de qué va.`;
+  $("#creditos").innerHTML = "Fotos de Unsplash: " + CREDITOS.map((u) => `<a href="https://unsplash.com/@${u}" target="_blank" rel="noopener">@${u}</a>`).join(", ") + ".";
+}
+
+/* ==========================================================================
+   HORARIO: filtros, columnas por día, vista previa y ficha ampliada
+   ========================================================================== */
+const filtro = { disciplina: "Todas", entrenador: "Todos", dia: "Todos" };
+const diasConClase = DIAS.filter((d) => CLASES.some((c) => c.dia === d));
+const ordenadas = [...CLASES].sort((a, b) => DIAS.indexOf(a.dia) - DIAS.indexOf(b.dia) || a.hora.localeCompare(b.hora));
+
+function pintarFiltros() {
+  const disciplinas = [...new Set(CLASES.map((c) => c.disciplina))];
+  const cuenta = (d) => CLASES.filter((c) => c.disciplina === d).length;
+  $("#filtro-disciplina").innerHTML = [["Todas", CLASES.length], ...disciplinas.map((d) => [d, cuenta(d)])]
+    .map(([d, n]) => `<button class="chip" type="button" data-disciplina="${escapar(d)}" aria-pressed="${d === "Todas"}">${escapar(d)} <small>${n}</small></button>`).join("");
+  const entrenadores = [...new Set(CLASES.map((c) => c.entrenador))];
+  $("#filtro-entrenador").innerHTML = ["Todos", ...entrenadores].map((e) => `<option value="${escapar(e)}">${e === "Todos" ? "Todos" : escapar(e)}</option>`).join("");
+  $("#filtro-dia").innerHTML = ["Todos", ...diasConClase].map((d) => `<option value="${d}">${d === "Todos" ? "Toda la semana" : d}</option>`).join("");
+
+  $("#filtro-disciplina").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-disciplina]");
+    if (!b) return;
+    $$("#filtro-disciplina .chip").forEach((x) => x.setAttribute("aria-pressed", x === b));
+    aplicarFiltro({ disciplina: b.dataset.disciplina });
+  });
+  $("#filtro-entrenador").addEventListener("change", (e) => aplicarFiltro({ entrenador: e.target.value }));
+  $("#filtro-dia").addEventListener("change", (e) => aplicarFiltro({ dia: e.target.value }));
+}
+
+function pintarSemana() {
+  $("#semana").innerHTML = diasConClase.map((d) => `
+    <div class="dia" data-dia="${d}" id="dia-${d}">
+      <h3>${d}</h3>
+      <div class="dia__lista">
+        ${ordenadas.filter((c) => c.dia === d).map((c) => `
+          <button class="clase" type="button" data-id="${c.id}" style="view-transition-name:${c.id}">
+            <span class="clase__hora">${escapar(c.hora)}</span>
+            <span class="clase__nombre">${escapar(c.nombre)}</span>
+            <span class="clase__meta">${escapar(c.disciplina)} · ${escapar(nombreCorto(c.entrenador))} · ${c.duracion} min</span>
+            ${discos(c.intensidad)}
+          </button>`).join("")}
+        <p class="dia__vacio" hidden>Hoy no hay clases con este filtro.</p>
+      </div>
+    </div>`).join("");
+  $("#dias").innerHTML = diasConClase.map((d, i) => `<button type="button" data-ir="${d}" aria-current="${i === 0}">${d.slice(0, 3)}</button>`).join("");
+  $("#semana").style.setProperty("--columnas", diasConClase.length);
+}
+
+const encaja = (c) =>
+  (filtro.disciplina === "Todas" || c.disciplina === filtro.disciplina) &&
+  (filtro.entrenador === "Todos" || c.entrenador === filtro.entrenador) &&
+  (filtro.dia === "Todos" || c.dia === filtro.dia);
+const visibles = () => ordenadas.filter(encaja);
+
+function aplicarFiltro(cambio) {
+  Object.assign(filtro, cambio);
+  const cambiar = () => {
+    $$(".clase").forEach((b) => b.classList.toggle("clase--fuera", !encaja(CLASES.find((c) => c.id === b.dataset.id))));
+    $$(".dia").forEach((col) => {
+      const fuera = filtro.dia !== "Todos" && col.dataset.dia !== filtro.dia;
+      col.hidden = fuera;
+      $(".dia__vacio", col).hidden = !!$(".clase:not(.clase--fuera)", col);
+    });
+    $("#semana").classList.toggle("semana--un-dia", filtro.dia !== "Todos");
+    $("#semana").style.setProperty("--columnas", filtro.dia === "Todos" ? diasConClase.length : 2);
+    $$("#dias button").forEach((b) => (b.hidden = filtro.dia !== "Todos" && b.dataset.ir !== filtro.dia));
+    const n = visibles().length;
+    $("#contador").textContent = n === 1 ? "1 clase" : `${n} clases`;
+  };
+  if (document.startViewTransition && !sinMovimiento && cambio) document.startViewTransition(cambiar);
+  else cambiar();
+}
+
+/* Pestañas de días en el móvil: llevan a la columna y se marcan al desplazar */
+function diasMovil() {
+  const semana = $("#semana");
+  $("#dias").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-ir]");
+    if (!b) return;
+    const col = $(`#dia-${b.dataset.ir}`);
+    semana.scrollTo({ left: col.offsetLeft - semana.offsetLeft - parseFloat(getComputedStyle(semana).paddingLeft), behavior: sinMovimiento ? "auto" : "smooth" });
+  });
+  const io = new IntersectionObserver((entradas) => {
+    entradas.forEach((en) => {
+      if (en.isIntersecting) $$("#dias button").forEach((b) => b.setAttribute("aria-current", b.dataset.ir === en.target.dataset.dia));
+    });
+  }, { root: semana, threshold: 0.6 });
+  $$(".dia").forEach((d) => io.observe(d));
+}
+
+/* Vista previa que sigue al cursor (solo ordenador) */
+function vistaPrevia() {
+  if (!conRaton) return;
+  const vp = $("#vista-previa");
+  let x = 0, y = 0, vx = 0, vy = 0, activa = false, bucle = 0;
+  const mover = () => {
+    vx += (x - vx) * (sinMovimiento ? 1 : 0.2);
+    vy += (y - vy) * (sinMovimiento ? 1 : 0.2);
+    const ancho = vp.offsetWidth, alto = vp.offsetHeight;
+    const px = vx + 26 + ancho > innerWidth ? vx - ancho - 26 : vx + 26;
+    const py = Math.min(vy + 20, innerHeight - alto - 12);
+    vp.style.transform = `translate3d(${px}px, ${py}px, 0) rotate(-2deg)`;
+    if (activa || Math.abs(x - vx) > 0.5) bucle = requestAnimationFrame(mover);
+  };
+  $("#semana").addEventListener("pointerover", (e) => {
+    const b = e.target.closest(".clase");
+    if (!b || e.pointerType !== "mouse") return;
+    const c = CLASES.find((k) => k.id === b.dataset.id);
+    vp.innerHTML = `<div class="vista-previa__media">${media(c.imagen, c.nombre)}</div><p><strong>${escapar(c.nombre)}</strong>${escapar(c.descripcion)}</p>`;
+    if (!activa) { vx = x = e.clientX; vy = y = e.clientY; }
+    activa = true;
+    vp.classList.add("activa");
+    cancelAnimationFrame(bucle); mover();
+  });
+  $("#semana").addEventListener("pointermove", (e) => { x = e.clientX; y = e.clientY; });
+  $("#semana").addEventListener("pointerout", (e) => {
+    if (e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(".clase")) return;
+    activa = false; vp.classList.remove("activa");
+  });
+  addEventListener("scroll", () => { activa = false; vp.classList.remove("activa"); }, { passive: true });
+}
+
+/* Ficha ampliada con anterior / siguiente */
+let fichaActual = null;
+function abrirFicha(id) {
+  const c = CLASES.find((k) => k.id === id);
+  fichaActual = id;
+  const lista = visibles(), pos = lista.findIndex((k) => k.id === id);
+  const ficha = $("#ficha");
+  ficha.innerHTML = `
+    <button class="cuadrado ficha__cerrar" type="button" data-cerrar aria-label="Cerrar">✕</button>
+    <div class="ficha__rejilla">
+      <div class="ficha__media">${media(c.imagen, c.nombre)}</div>
+      <div class="ficha__cuerpo">
+        <h2 id="ficha-titulo">${escapar(c.nombre)}</h2>
+        <p>${escapar(c.descripcion)}</p>
+        <dl class="ficha__datos">
+          <div><dt>Disciplina</dt><dd>${escapar(c.disciplina)}</dd></div>
+          <div><dt>Entrenador</dt><dd>${escapar(c.entrenador)}</dd></div>
+          <div><dt>Cuándo</dt><dd>${escapar(c.dia)} · ${escapar(c.hora)}</dd></div>
+          <div><dt>Duración</dt><dd>${c.duracion} min</dd></div>
+          <div><dt>Intensidad</dt><dd>${discos(c.intensidad)}</dd></div>
+        </dl>
+        <div class="ficha__acciones">
+          <button class="boton" type="button" data-probar="${c.id}">Quiero probar esta <span class="flecha" aria-hidden="true">→</span></button>
+          <div class="ficha__nav">
+            <button class="cuadrado" type="button" data-paso="-1" aria-label="Clase anterior" ${lista.length < 2 ? "disabled" : ""}>←</button>
+            <button class="cuadrado" type="button" data-paso="1" aria-label="Clase siguiente" ${lista.length < 2 ? "disabled" : ""}>→</button>
+          </div>
+        </div>
+        <p style="font-size:.85rem;color:#4E554F">${pos + 1} de ${lista.length}${filtro.disciplina !== "Todas" ? " · " + escapar(filtro.disciplina) : ""}</p>
+      </div>
+    </div>`;
+  if (!ficha.open) ficha.showModal();
+}
+function moverFicha(paso) {
+  const lista = visibles();
+  if (!lista.length) return;
+  const i = lista.findIndex((k) => k.id === fichaActual);
+  abrirFicha(lista[(i + paso + lista.length) % lista.length].id);
+}
+function ficha() {
+  const dlg = $("#ficha");
+  $("#semana").addEventListener("click", (e) => {
+    const b = e.target.closest(".clase");
+    if (b) { $("#vista-previa").classList.remove("activa"); abrirFicha(b.dataset.id); }
+  });
+  dlg.addEventListener("click", (e) => {
+    if (e.target === dlg || e.target.closest("[data-cerrar]")) return dlg.close();
+    const paso = e.target.closest("[data-paso]");
+    if (paso) return moverFicha(+paso.dataset.paso);
+    const probar = e.target.closest("[data-probar]");
+    if (probar) {
+      const c = CLASES.find((k) => k.id === probar.dataset.probar);
+      dlg.close();
+      elegir({ interes: "clase:" + c.id, entrenador: c.entrenador });
+    }
+  });
+  dlg.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") moverFicha(1);
+    if (e.key === "ArrowLeft") moverFicha(-1);
+  });
+}
+
+/* ==========================================================================
+   ENTRENADORES, TARIFAS, PASOS Y PREGUNTAS
+   ========================================================================== */
+function pintarEntrenadores() {
+  $("#lista-entrenadores").innerHTML = ENTRENADORES.map((e) => `
+    <article class="coach">
+      <figure class="coach__foto" data-aparece>${media(e.foto, e.nombre, true)}</figure>
+      <div class="coach__texto">
+        <h3 class="coach__nombre" data-aparece>${escapar(e.nombre)}</h3>
+        <p class="coach__especialidad" data-aparece style="--d:1">${escapar(e.especialidad)}</p>
+        <p class="coach__frase" data-aparece style="--d:2">${escapar(e.frase)}</p>
+        <div class="coach__listas" data-aparece style="--d:3">
+          <div><h4>Disciplinas</h4><ul class="etiquetas">${e.disciplinas.map((d) => `<li>${escapar(d)}</li>`).join("")}</ul></div>
+          <div><h4>Certificaciones</h4><ul>${e.certificaciones.map((c) => `<li>${escapar(c)}</li>`).join("")}</ul></div>
+        </div>
+        <div class="coach__acciones" data-aparece style="--d:4">
+          <button class="boton" type="button" data-con="${escapar(e.nombre)}">Reservar con ${escapar(nombreCorto(e.nombre))} <span class="flecha" aria-hidden="true">→</span></button>
+          <a class="enlace" href="${urlInstagram(e.instagram)}" target="_blank" rel="noopener">@${escapar(e.instagram)}</a>
+        </div>
+      </div>
+    </article>`).join("");
+  $("#lista-entrenadores").addEventListener("click", (ev) => {
+    const b = ev.target.closest("[data-con]");
+    if (b) elegir({ entrenador: b.dataset.con });
+  });
+}
+
+function pintarTarifas() {
+  $("#lista-tarifas").innerHTML = TARIFAS.map((t, i) => `
+    <article class="tarjeta ${t.disponible ? "" : "tarjeta--completa"}" data-aparece style="--d:${i}" data-plan="${i}">
+      <span class="tarjeta__ponche" aria-hidden="true"></span>
+      <div class="tarjeta__cuerpo">
+        <p class="tarjeta__socio"><span>${escapar(GIMNASIO.nombre)} · Tarjeta de socio</span><span>Nº ${String(i + 1).padStart(3, "0")}</span></p>
+        <h3>${escapar(t.nombre)}</h3>
+        <p class="tarjeta__precio">${t.precio} €<small>${escapar(t.periodo)}</small></p>
+        <ul class="tarjeta__incluye">${t.incluye.map((x) => `<li>${escapar(x)}</li>`).join("")}</ul>
+        <button class="boton ${i === 1 ? "" : "boton--tinta"}" type="button" data-elegir-plan="${i}">${t.disponible ? "Elegir este plan" : "Apuntarme a la lista de espera"} <span class="flecha" aria-hidden="true">→</span></button>
+      </div>
+      <div class="tarjeta__resguardo"><span class="perforado" aria-hidden="true">${"<i></i>".repeat(11)}</span><span class="sello-estado ${t.disponible ? "sello-estado--libre" : "sello-estado--completo"}">${t.disponible ? "Plazas libres" : "Completo"}</span></div>
+    </article>`).join("");
+  $("#lista-tarifas").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-elegir-plan]");
+    if (!b) return;
+    $$(".tarjeta").forEach((t) => t.classList.toggle("elegida", t.dataset.plan === b.dataset.elegirPlan));
+    setTimeout(() => elegir({ interes: "plan:" + b.dataset.elegirPlan }), sinMovimiento ? 0 : 420);
+  });
+}
+
+function pintarPasos() {
+  $("#carril").insertAdjacentHTML("beforeend", PASOS.map((p, i) => `
+    <li class="paso" data-aparece style="--d:${i}">
+      <p class="paso__cuando">${escapar(p.cuando)}</p>
+      <span class="paso__marca" aria-hidden="true"></span>
+      <h3>${escapar(p.titulo)}</h3>
+      <p>${escapar(p.texto)}</p>
+    </li>`).join(""));
+}
+
+function pintarPreguntas() {
+  $("#lista-faq").innerHTML = PREGUNTAS.map((q, i) => `
+    <details class="pregunta" data-aparece style="--d:${i % 4}" ${i === 0 ? "open" : ""}>
+      <summary>${escapar(q.p)} <span class="mas" aria-hidden="true"></span></summary>
+      <p class="pregunta__respuesta">${escapar(q.r)}</p>
+    </details>`).join("");
+}
+
+/* ==========================================================================
+   RESERVA: el formulario arma un mensaje de WhatsApp o un email y lo abre
+   ========================================================================== */
+function pintarFormulario() {
+  const opcionesClases = ordenadas.map((c) => `<option value="clase:${c.id}">${escapar(c.nombre)} · ${c.dia.slice(0, 3)} ${c.hora}</option>`).join("");
+  const opcionesPlanes = TARIFAS.map((t, i) => `<option value="plan:${i}">${escapar(t.nombre)} · ${t.precio} € ${escapar(t.periodo)}${t.disponible ? "" : " (lista de espera)"}</option>`).join("");
+  $("#f-interes").innerHTML = `<option value="">Todavía no lo sé</option><optgroup label="Clases">${opcionesClases}</optgroup><optgroup label="Tarifas">${opcionesPlanes}</optgroup>`;
+  $("#f-entrenador").innerHTML = `<option value="">Me da igual</option>` + ENTRENADORES.map((e) => `<option>${escapar(e.nombre)}</option>`).join("");
+  $("#f-dias").innerHTML = diasConClase.map((d) => `<label class="opcion"><input type="checkbox" name="dias" value="${d}"><span>${d.slice(0, 3)}</span></label>`).join("");
+
+  const form = $("#formulario");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const datos = new FormData(form);
+    const nombre = (datos.get("nombre") || "").trim();
+    const aviso = $("#aviso");
+    if (!nombre) {
+      aviso.textContent = "Falta tu nombre: así sabemos a quién esperar.";
+      aviso.classList.add("error");
+      $("#f-nombre").focus();
+      return;
+    }
+    aviso.classList.remove("error");
+    const interes = $("#f-interes").selectedOptions[0];
+    const lineas = [
+      `Hola, ${GIMNASIO.nombre}. Quiero reservar mi clase de prueba gratis.`,
+      "",
+      `· Nombre: ${nombre}`,
+      `· Objetivo: ${datos.get("objetivo")}`,
+      `· Me interesa: ${interes && interes.value ? interes.textContent : "todavía no lo sé"}`,
+      `· Entrenador: ${datos.get("entrenador") || "me da igual"}`,
+      `· Nivel: ${datos.get("nivel")}`,
+      `· Días: ${datos.getAll("dias").join(", ") || "cualquiera"}`,
+      `· Horas: ${datos.getAll("horas").join(", ") || "cualquiera"}`,
+    ];
+    const nota = (datos.get("nota") || "").trim();
+    if (nota) lineas.push(`· Algo más: ${nota}`);
+    const texto = lineas.join("\n");
+    const via = e.submitter ? e.submitter.value : "whatsapp";
+    if (via === "email") {
+      location.href = `mailto:${GIMNASIO.email}?subject=${encodeURIComponent("Clase de prueba · " + nombre)}&body=${encodeURIComponent(texto)}`;
+      aviso.textContent = "Se ha abierto tu correo con el mensaje escrito. Solo falta enviarlo.";
+    } else {
+      window.open(urlWhatsapp(texto), "_blank", "noopener");
+      aviso.textContent = "Se ha abierto WhatsApp con el mensaje escrito. Solo falta enviarlo.";
+    }
+  });
+}
+
+/* Rellena la reserva desde una clase, un entrenador o un plan, y baja hasta ella */
+function elegir({ interes, entrenador }) {
+  if (interes) $("#f-interes").value = interes;
+  if (entrenador) $("#f-entrenador").value = entrenador;
+  $("#reserva").scrollIntoView({ behavior: sinMovimiento ? "auto" : "smooth" });
+  /* El foco va al nombre cuando termina el desplazamiento */
+  let enfocado = false;
+  const enfocar = () => { if (!enfocado) { enfocado = true; $("#f-nombre").focus({ preventScroll: true }); } };
+  addEventListener("scrollend", enfocar, { once: true });
+  setTimeout(enfocar, sinMovimiento ? 0 : 1600);
+  [interes && "#f-interes", entrenador && "#f-entrenador"].filter(Boolean).forEach((s) => {
+    if (!sinMovimiento) $(s).animate([{ background: "rgba(20,19,18,.25)" }, { background: "transparent" }], { duration: 1600, delay: 600, easing: "ease-out" });
+  });
+}
+
+/* ==========================================================================
+   MOVIMIENTO
+   ========================================================================== */
+/* Polvo de magnesio: partículas en un lienzo encima de todo */
+const polvo = (() => {
+  const lienzo = $("#polvo");
+  const ctx = lienzo.getContext("2d");
+  let ps = [], corriendo = false, dpr = 1;
+  const medir = () => {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    lienzo.width = innerWidth * dpr; lienzo.height = innerHeight * dpr;
+  };
+  medir(); addEventListener("resize", medir);
+  const paso = () => {
+    ctx.clearRect(0, 0, lienzo.width, lienzo.height);
+    ps = ps.filter((p) => (p.vida -= p.ritmo) > 0);
+    for (const p of ps) {
+      p.x += p.vx; p.y += p.vy; p.vx *= 0.96; p.vy = p.vy * 0.96 + 0.015;
+      ctx.globalAlpha = Math.max(0, p.vida) * p.a;
+      ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(p.x * dpr, p.y * dpr, p.r * dpr, 0, 6.283); ctx.fill();
+    }
+    if (ps.length) requestAnimationFrame(paso); else { corriendo = false; ctx.clearRect(0, 0, lienzo.width, lienzo.height); }
+  };
+  return (x, y, n, fuerza = 1, ancho = 0, color = "#fff") => {
+    if (sinMovimiento) return;
+    for (let i = 0; i < n; i++) {
+      const ang = Math.random() * Math.PI * 2, vel = (0.3 + Math.random() * 1.8) * fuerza;
+      ps.push({ x: x + (Math.random() - 0.5) * ancho, y, vx: Math.cos(ang) * vel, vy: Math.sin(ang) * vel * 0.6 - 0.4 * fuerza,
+        r: 0.6 + Math.random() * 2.2, vida: 1, ritmo: 0.012 + Math.random() * 0.02, a: 0.35 + Math.random() * 0.45, color });
+    }
+    if (ps.length > 900) ps = ps.slice(-900);
+    if (!corriendo) { corriendo = true; requestAnimationFrame(paso); }
+  };
+})();
+
+/* Titular: cada línea se estampa como un sello y suelta una nube de magnesio */
+function estamparTitular() {
+  const lineas = $$("#titular .linea");
+  if (sinMovimiento || !lineas[0].animate) return;
+  const oscuro = matchMedia("(prefers-color-scheme: dark)").matches;
+  lineas.forEach((l, i) => {
+    const retraso = 180 + i * 360;
+    l.animate([
+      { opacity: 0, transform: "scale(1.42) rotate(-2.5deg)", filter: "blur(10px)" },
+      { opacity: 1, transform: "scale(.985) rotate(0)", filter: "blur(0)", offset: 0.62 },
+      { opacity: 1, transform: "none", filter: "blur(0)" },
+    ], { duration: 560, delay: retraso, easing: "cubic-bezier(.5,0,.75,0)", fill: "backwards" });
+    setTimeout(() => {
+      const r = l.getBoundingClientRect();
+      const ancho = Math.min(r.width, l.scrollWidth);
+      polvo(r.left + ancho / 2, r.bottom - r.height * 0.1, 70, 1.4, ancho * 0.9, oscuro ? "#F3F1EC" : "#FFFFFF");
+      $("#titular").animate([{ transform: "translateY(3px)" }, { transform: "none" }], { duration: 180, easing: "ease-out" });
+    }, retraso + 340);
+  });
+}
+
+/* Aparición suave de los bloques al entrar en pantalla */
+function aparecer() {
+  const els = $$("[data-aparece]");
+  if (!("IntersectionObserver" in window)) return els.forEach((el) => el.classList.add("visto"));
+  const io = new IntersectionObserver((entradas) => {
+    entradas.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visto"); io.unobserve(en.target); } });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+  els.forEach((el) => io.observe(el));
+}
+
+/* La barra olímpica: los discos se cargan al bajar por la portada */
+function barraOlimpica() {
+  const lienzo = $("#barra");
+  /* Discos de dentro hacia fuera en cada lado. kg = peso estampado. */
+  const CARGA = [
+    { kg: 20, grosor: 3.1, clase: "" },
+    { kg: 15, grosor: 2.6, clase: "disco--acento" },
+    { kg: 10, grosor: 2.0, clase: "" },
+    { kg: 5, grosor: 1.3, clase: "disco--peque" },
+  ];
+  const TOPE = 24.5; // % donde acaba el manguito por dentro
+  let html = `<div class="carga__eje"></div>
+    <div class="carga__manguito" style="left:1%;width:${TOPE - 1}%"></div><div class="carga__manguito" style="left:${100 - TOPE}%;width:${TOPE - 1}%"></div>
+    <div class="carga__tope" style="left:${TOPE}%"></div><div class="carga__tope" style="left:${100 - TOPE - 1.1}%"></div>`;
+  const piezas = [];
+  ["izq", "der"].forEach((lado) => {
+    let acum = 0;
+    [...CARGA, { kg: 0, grosor: 1.2, clase: "disco--cierre" }].forEach((d, i) => {
+      const left = lado === "izq" ? TOPE - acum - d.grosor : 100 - TOPE + acum;
+      acum += d.grosor + 0.15;
+      html += `<div class="disco ${d.clase}" data-lado="${lado}" data-i="${i}" style="left:${left}%;width:${d.grosor}%">${d.kg ? `<span>${d.kg} kg</span>` : ""}</div>`;
+      piezas.push({ lado, i, kg: d.kg });
+    });
+  });
+  lienzo.innerHTML = html;
+  const els = $$(".disco", lienzo);
+  const total = CARGA.length + 1;
+  const portada = $("#portada");
+  let primeraCarga = 0, objetivo = 0, ultimoKg = -1;
+
+  const pintar = () => {
+    const p = Math.max(primeraCarga, objetivo);
+    let kg = 20; // la barra pesa 20 kg
+    els.forEach((el, n) => {
+      const pieza = piezas[n];
+      const inicio = pieza.i / total;              // cada disco entra en su tramo
+      const t = Math.min(1, Math.max(0, (p - inicio) * total * 1.15));
+      const e = 1 - Math.pow(1 - t, 3);
+      const fuera = (1 - e) * (pieza.lado === "izq" ? -1 : 1) * 46;
+      el.style.transform = `translateX(${fuera}vw)`;
+      el.style.opacity = t > 0 ? 1 : 0;
+      if (t >= 1) kg += pieza.kg;
+    });
+    if (kg !== ultimoKg) { $("#kg").textContent = kg; ultimoKg = kg; }
+  };
+  if (sinMovimiento) { objetivo = 1; return pintar(); }
+  /* Al cargar la página entran solos los dos de 20 kg */
+  const t0 = performance.now();
+  const auto = (t) => {
+    primeraCarga = Math.min(1 / total, ((t - t0 - 900) / 900) / total);
+    pintar();
+    if (t - t0 < 1900) requestAnimationFrame(auto);
+  };
+  requestAnimationFrame(auto);
+  const alDesplazar = () => {
+    objetivo = Math.min(1, Math.max(0, scrollY / (portada.offsetHeight * 0.55)));
+    pintar();
+  };
+  addEventListener("scroll", () => requestAnimationFrame(alDesplazar), { passive: true });
+  alDesplazar();
+}
+
+/* Cinta del carril de "Cómo empezar": avanza con el scroll */
+function carril() {
+  const carril = $(".carril-caja"), cinta = $(".carril__cinta");
+  const pasos = $$(".paso", carril);
+  if (sinMovimiento) { pasos.forEach((p) => p.classList.add("hecho")); return; }
+  const actualizar = () => {
+    const r = carril.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (innerHeight * 0.8 - r.top) / (r.height + innerHeight * 0.3)));
+    cinta.style.setProperty("--avance", p.toFixed(3));
+    pasos.forEach((paso, i) => paso.classList.toggle("hecho", p >= (i + 0.2) / pasos.length));
+  };
+  addEventListener("scroll", () => requestAnimationFrame(actualizar), { passive: true });
+  actualizar();
+}
+
+/* Cursor: un punto de magnesio que suelta un poco de polvo */
+function cursor() {
+  if (!conRaton || sinMovimiento) return;
+  const c = $("#cursor");
+  let ultimo = 0;
+  addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse") return;
+    c.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    c.classList.add("visible");
+    const ahora = performance.now();
+    if (ahora - ultimo > 45) { ultimo = ahora; polvo(e.clientX, e.clientY, 1, 0.25); }
+  }, { passive: true });
+  document.addEventListener("pointerleave", () => c.classList.remove("visible"));
+  document.addEventListener("pointerover", (e) => c.classList.toggle("grande", !!e.target.closest("a, button, select, label, summary, input, textarea")));
+  addEventListener("pointerdown", (e) => polvo(e.clientX, e.clientY, 16, 0.9));
+}
+
+/* Menú del móvil */
+function menuMovil() {
+  const b = $("#abrir-menu"), m = $("#menu");
+  b.addEventListener("click", () => {
+    const abierto = m.classList.toggle("abierto");
+    b.setAttribute("aria-expanded", abierto);
+    b.textContent = abierto ? "Cerrar" : "Menú";
+  });
+  m.addEventListener("click", (e) => { if (e.target.closest("a")) { m.classList.remove("abierto"); b.setAttribute("aria-expanded", false); b.textContent = "Menú"; } });
+}
+
+/* ---------- Arranque ---------- */
+rellenarGimnasio();
+pintarFiltros();
+pintarSemana();
+aplicarFiltro();
+diasMovil();
+vistaPrevia();
+ficha();
+pintarEntrenadores();
+pintarTarifas();
+pintarPasos();
+pintarPreguntas();
+pintarFormulario();
+menuMovil();
+aparecer();
+estamparTitular();
+barraOlimpica();
+carril();
+cursor();
+</script>
+</body>
+</html>
